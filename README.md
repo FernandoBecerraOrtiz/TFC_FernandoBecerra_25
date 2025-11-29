@@ -304,13 +304,13 @@ Validaciones:
 
 # 7. Anexo I – Manual de usuario
 
-- ![Descargar](docs/)
+- ![Descargar](docs/ManualDeUsuario)
 
 ---
 
 # 8. Anexo II – Manual de instalación
 
-- ![Descargar](docs/)
+- ![Descargar](docs/ManualDeInstalacion)
 
 ---
 
