@@ -12,7 +12,7 @@ Curso 2025
 
 <div align="center">
   <img src="docs/logo.png" alt="Logo Foobar" width="100px">
-  <img src="docs/iessuarezdefigueroa.png" alt="Logo del IES Suarez de Figueroa" width="300px">
+  <img src="docs/iessuarezdefigueroa.png" alt="Logo del IES Suarez de Figueroa" width="340px">
 </div>
 
 ---
