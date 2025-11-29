@@ -1,4 +1,4 @@
-# Proyecto Final – Foobar  <img src="docs/logo.png" alt="Logo Foobar" width="80px">
+# Proyecto Final – Foobar  <img src="docs/logo.png" alt="Logo Foobar" width="60px"> <img align="right" src="docs/iessuarezdefigueroa.png" alt="Logo del IES Suarez de Figueroa" width="200px">
 
 ## Plataforma Web de Cursos Online
 
@@ -9,10 +9,6 @@ Tutor José Antonio Rodríguez Argueta
 Ciclo Formativo Desarrollo de Aplicaciones Web  
 Curso 2025  
 ```
-
-<p align="center">
-  <img src="docs/iessuarezdefigueroa.png" alt="Logo del IES Suarez de Figueroa">
-</p>
 
 ---
 
