@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="assets/images/logo.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Space+Grotesk&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/3b65296541.js" crossorigin="anonymous"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/color-modes.js"></script>
+    <script src="js/typedfbo.js"></script>
+    <title>Foobar</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-fbo z-3">
+            <div class="container">
+                <!-- Eslogan -->
+                <a class="navbar-brand" href="/">
+                    <img src="assets/images/logo.png" alt="Logo de Foobar" width="30" height="30" class="d-inline-block align-text-top me-2">
+                    <span class="fw-bold text-white">Foobar</span>
+                </a>
+
+                <!-- Boton Menu hamburguesa -->
+                <button class="navbar-toggler border-white" type="button" data-bs-toggle="collapse" data-bs-target="#menuHamburguesa" aria-controls="menuHamburguesa">
+                    <span role="button"><i class="fa-solid fa-bars"></i></span>
+                </button>
+
+                <!-- Enlaces a otras páginas -->
+                <div class="collapse navbar-collapse text-white" id="menuHamburguesa">
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link text-white" href="/">Inicio</a>
+                        <a class="nav-link text-white" href="/cursos">Cursos</a>
+                        <a class="nav-link text-white" href="/precios">Precios</a>
+                        <a class="nav-link text-white" href="/contacto">Contacto</a>
+                        <button id="btnCesta" type="button" class="btn btn-outline-warning" data-bs-toggle="offcanvas" data-bs-target="#cestaCanvas">Cesta</button>
+                    </div>
+
+                    <!-- Boton para hacer login -->
+                    <div id="login" class="ms-lg-2 mt-sm-2 mt-lg-0" data-bs-toggle="modal" data-bs-target="#formularioLoginModal">
+                        <a class="btn btn btn-outline-danger text-white d-flex justify-content-center align-items-center" role="button">
+                            Iniciar sesión <i class="bi bi-person-circle fs-4 ms-2"></i>
+                        </a>
+                    </div>
+
+                    <!-- Botones gestion usuario -->
+                    <div id="perfil" class="ms-lg-2 mt-sm-2 mt-lg-0 dropdown d-none">
+                        <a class="btn btn-secondary dropdown-toggle nav-link" role="button" data-bs-toggle="dropdown">
+                            <!-- El nombre del usuario se coloca en javascript -->
+                        </a>
+
+                        <ul class="dropdown-menu text-small dropdown-fbo" data-popper-placement="bottom-start">
+                            <li><a class="dropdown-item" href="/perfil"><i class="bi bi-person me-2"></i>Perfil</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li id="cerrarSesion"><a class="dropdown-item"><i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Modal a mostrar al hacer click en "Login" -->
+        <div class="modal fade" id="formularioLoginModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex flex-column w-75 mx-auto">
+                        <h4 class="modal-title text-center mb-4 fs-4 fw-bold">Login de usuario</h4>
+
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="mail" placeholder="Email usuario" value="carlosazaustre@gmail.com">
+                            <label for="mail">Email usuario</label>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="form-floating flex-grow-1">
+                                <input type="password" class="form-control" id="pass" placeholder="Contraseña" value="123">
+                                <label for="pass">Contraseña</label>
+                            </div>
+                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                        <div class="form-check my-3 d-flex align-items-center">
+                            <input type="checkbox" class="form-check-input me-2" id="flexCheckDefault" checked>
+                            <label class="form-check-label" for="flexCheckDefault">Recuerdame</label>
+                        </div>
+                        <div id="alertaLogin" class="alert alert-danger d-flex align-items-center d-none" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            <div>Usuario o contraseña incorrectos</div>
+                        </div>
+                        <button id="modalLogin" type="button" class="btn btn-danger w-100 fs-5 mb-3">Iniciar sesión</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Cambio de tema -->
+        <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+            <button class="btn btn-danger py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
+                aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
+                <svg class="bi my-1 theme-icon-active" aria-hidden="true">
+                    <use href="#circle-half"></use>
+                </svg>
+                <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+                <li>
+                    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                        <svg class="bi me-2 opacity-50" aria-hidden="true">
+                            <use href="#sun-fill"></use>
+                        </svg>
+                        Claro
+                        <svg class="bi ms-auto d-none" aria-hidden="true">
+                            <use href="#check2"></use>
+                        </svg>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                        <svg class="bi me-2 opacity-50" aria-hidden="true">
+                            <use href="#moon-stars-fill"></use>
+                        </svg>
+                        Oscuro
+                        <svg class="bi ms-auto d-none" aria-hidden="true">
+                            <use href="#check2"></use>
+                        </svg>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+                        <svg class="bi me-2 opacity-50" aria-hidden="true">
+                            <use href="#circle-half"></use>
+                        </svg>
+                        Auto
+                        <svg class="bi ms-auto d-none" aria-hidden="true">
+                            <use href="#check2"></use>
+                        </svg>
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <!-- Iconos cambio de tema (claro, oscuro, auto) -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+            <symbol id="check2" viewBox="0 0 16 16">
+                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z">
+                </path>
+            </symbol>
+            <symbol id="circle-half" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
+            </symbol>
+            <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+                <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z">
+                </path>
+                <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z">
+                </path>
+            </symbol>
+            <symbol id="sun-fill" viewBox="0 0 16 16">
+                <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z">
+                </path>
+            </symbol>
+        </svg>
+
+        <!-- Botón de volver arriba -->
+        <button type="button" class="btn btn-danger btn-floating btn-lg z-3" id="btn-back-to-top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+
+        <section class="bg-fbo-aux py-5">
+            <div class="container px-5">
+                <div class="row gx-5 align-items-center justify-content-center">
+                    <div class="col-lg-8 col-xl-7 col-xxl-6">
+                        <div class="my-5 text-center text-xl-start">
+                            <!-- No necesitas otro bootcamp. Necesitas resultados. -->
+                            <h1 id="typed" class="display-5 fw-bolder text-white mb-2"></h1>
+                            <p class="lead fw-normal text-white-50 mb-4">¿Inviertes tiempo y dinero en formación que no cumple lo prometido? Cambia la frustración por progreso real. Con nuestros cursos prácticos, aprenderás a tu ritmo, con el apoyo de expertos y sin pagar de más.</p>
+                            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
+                                <a class="btn btn-danger btn-lg px-4 me-sm-3" href="/precios">Empieza hoy</a>
+                                <a class="btn btn-outline-light btn-lg px-4" href="/cursos">Lee experiencias reales</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5"
+                            src="assets/images/hero3.webp" alt="..."></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="my-2">
+            <div class="container px-5 my-5">
+                <div class="text-center mb-5">
+                    <h1 class="fw-bolder">Preguntas Frecuentes</h1>
+                    <p class="lead fw-normal text-muted mb-0">¿Cómo podemos ayudarte?</p>
+                </div>
+                <div class="row gx-5">
+                    <div class="col-xl-8">
+                        <h3 class="mb-4 fw-bold">Respecto a los cursos</h3>
+                        <div class="accordion" id="faqAccordion">
+
+                            <div class="accordion-item rounded-3 mb-2">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
+                                        ¿Qué tipo de cursos ofrecen?
+                                    </button>
+                                </h2>
+                                <div id="faq1" class="accordion-collapse collapse show">
+                                    <div class="accordion-body">
+                                        Ofrecemos cursos prácticos en programación web y desarrollo de software,
+                                        incluyendo tecnologías como HTML, CSS, JavaScript, React, Python, Git, SQL y
+                                        más. Todos los cursos están orientados a proyectos para un aprendizaje real.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item rounded-3 mb-2">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                                        ¿Necesito experiencia previa?
+                                    </button>
+                                </h2>
+                                <div id="faq2" class="accordion-collapse collapse">
+                                    <div class="accordion-body">
+                                        No. Tenemos cursos desde nivel principiante hasta avanzado. Si estás comenzando,
+                                        nuestros cursos introductorios te guiarán paso a paso con explicaciones claras y
+                                        ejercicios prácticos.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item rounded-3 mb-2">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                                        ¿Cómo son los profesores?
+                                    </button>
+                                </h2>
+                                <div id="faq3" class="accordion-collapse collapse">
+                                    <div class="accordion-body">
+                                        Todos nuestros profesores son desarrolladores profesionales con experiencia en
+                                        el sector. Son expertos didácticos apasionados por la enseñanza y comprometidos
+                                        con guiarte durante todo tu proceso de aprendizaje.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item rounded-3 mb-2">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                                        ¿Recibiré un certificado?
+                                    </button>
+                                </h2>
+                                <div id="faq4" class="accordion-collapse collapse">
+                                    <div class="accordion-body">
+                                        Sí, al completar cada curso obtendrás un certificado digital que puedes añadir a
+                                        tu CV o compartir en LinkedIn para mejorar tu perfil profesional.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item rounded-3 mb-2">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
+                                        ¿Puedo acceder a los cursos en cualquier momento?
+                                    </button>
+                                </h2>
+                                <div id="faq5" class="accordion-collapse collapse">
+                                    <div class="accordion-body">
+                                        Por supuesto. Todos nuestros cursos están disponibles on-demand, lo que
+                                        significa que puedes acceder a ellos en cualquier momento, desde cualquier
+                                        dispositivo, y avanzar a tu ritmo.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="mb-4 fw-bold mt-5">Proyectos prácticos</h3>
+                        <div class="accordion" id="projectsAccordion">
+                            <div class="accordion-item rounded-3 mb-2">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#project1" aria-expanded="true" aria-controls="project1">
+                                        ¿Qué tipo de proyectos puedo crear?
+                                    </button>
+                                </h2>
+                                <div id="project1" class="accordion-collapse collapse show">
+                                    <div class="accordion-body">
+                                        Podrás construir desde sitios web responsivos, portafolios personales, clones de
+                                        apps populares (como Spotify o Netflix), hasta dashboards con React y APIs. Cada
+                                        curso incluye retos reales del mundo laboral.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item rounded-3 mb-2">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#project2" aria-expanded="false" aria-controls="project2">
+                                        ¿Recibo feedback sobre mis proyectos?
+                                    </button>
+                                </h2>
+                                <div id="project2" class="accordion-collapse collapse">
+                                    <div class="accordion-body">
+                                        Sí. En nuestros planes Pro y Premium puedes subir tus proyectos para recibir
+                                        comentarios del profesor o del equipo técnico. Además, puedes compartir tu
+                                        código con la comunidad para recibir sugerencias y mejoras.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item rounded-3 mb-2">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#project3" aria-expanded="false" aria-controls="project3">
+                                        ¿Puedo usar mis proyectos en mi portafolio profesional?
+                                    </button>
+                                </h2>
+                                <div id="project3" class="accordion-collapse collapse">
+                                    <div class="accordion-body">
+                                        ¡Claro que sí! Todos los proyectos que desarrolles son tuyos. Te animamos a
+                                        incluirlos en tu portafolio para demostrar tus habilidades en entrevistas o
+                                        perfiles como GitHub y LinkedIn.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item rounded-3 mb-2">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#project4" aria-expanded="false" aria-controls="project4">
+                                        ¿Qué herramientas necesito para hacer los proyectos?
+                                    </button>
+                                </h2>
+                                <div id="project4" class="accordion-collapse collapse">
+                                    <div class="accordion-body">
+                                        Solo necesitas un navegador moderno y un editor de código como Visual Studio
+                                        Code. En algunos cursos también se utilizan herramientas como Git, Figma, APIs
+                                        públicas y plataformas como Netlify o Vercel.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item rounded-3 mb-2">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#project5" aria-expanded="false" aria-controls="project5">
+                                        ¿Cómo se evalúa un proyecto?
+                                    </button>
+                                </h2>
+                                <div id="project5" class="accordion-collapse collapse">
+                                    <div class="accordion-body">
+                                        Cada proyecto incluye una rúbrica con criterios de evaluación como estructura
+                                        del código, diseño responsive, uso correcto de tecnologías y funcionalidad. Esto
+                                        te ayuda a entender cómo mejorar tus habilidades paso a paso.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4">
+                        <!-- Formulario de consulta -->
+                        <div class="card border-0 bg-fbo mt-xl-5 mb-sm-3">
+                            <div class="card-body p-4 py-lg-5 text-center text-white">
+                                <div class="text-center mb-3">
+                                    <i class="bi bi-chat-dots-fill fs-1 px-4 py-2 bg-fbo-red text-fbo"></i>
+                                </div>
+                                <h5 class="fw-bold mb-3 text-fbo-red">¿Tienes dudas o sugerencias?</h5>
+                                <p class="mb-4">Completa nuestro formulario y un asesor educativo se pondrá en contacto
+                                    contigo en menos de 24 horas. Estamos aquí para ayudarte a elegir el mejor camino
+                                    para tu formación profesional.</p>
+                                <a href="#contacto" class="btn btn-outline-light">Ir al formulario</a>
+                            </div>
+                        </div>
+
+                        <!-- Atención personalizada -->
+                        <div class="card border-0 bg-fbo-red mt-xl-5 mb-sm-3">
+                            <div class="card-body p-4 py-lg-5 text-center text-white">
+                                <div class="text-center mb-3">
+                                    <i class="bi bi-telephone-fill fs-1 px-4 py-2 bg-fbo text-fbo-red"></i>
+                                </div>
+                                <h5 class="fw-bold mb-3 text-white">Atención personalizada</h5>
+                                <p>Nuestro equipo de soporte está disponible para responder tus preguntas de lunes a
+                                    viernes, de 9:00 a 18:00 (hora local).</p>
+                                <p class="mb-0">
+                                <p class="fw-bold">Teléfono: +34 912 345 678</p>
+                                <p class="fw-bold">Email: soporte@foobarCursos.com</p>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Consulta de precios -->
+                        <div class="card border-0 bg-fbo mt-xl-5 mb-sm-3">
+                            <div class="card-body p-4 py-lg-5 text-center text-white">
+                                <div class="text-center mb-3 text-fbo-red">
+                                    <i class="bi bi-cash-coin fs-1 px-4 py-2 bg-fbo-red text-fbo"></i>
+                                </div>
+                                <h5 class="fw-bold mb-3 text-fbo-red">Consulta nuestros precios</h5>
+                                <p>Explora nuestros planes de suscripción y accede a cientos de
+                                    cursos actualizados. Tenemos opciones flexibles para todos los niveles, desde
+                                    principiantes hasta desarrolladores avanzados.</p>
+                                <a href="/precios" class="btn btn-outline-light">Ver planes y precios</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="d-flex flex-column align-items-center pt-5 mt-2">
+            <div class="bg-fbo text-white w-100 my-5 p-5 rounded-4 shadow-lg width-contact">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold display-6">
+                        Contacta con nosotros
+                    </h2>
+                    <p class="text-light fs-6">Estaremos encantados de ayudarte con cualquier duda o consulta.</p>
+                </div>
+
+                <form id="contact-form">
+                    <div class="row g-4">
+
+                        <div class="col-md-6">
+                            <label for="id_name" class="form-label">Nombre <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control form-control-lg" id="id_name" name="name"
+                                placeholder="Tu nombre" maxlength="200" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="id_name_business" class="form-label">Nombre de la empresa <small
+                                    class="text-white">(Opcional)</small></label>
+                            <input type="text" class="form-control form-control-lg" id="id_name_business"
+                                name="name_business" placeholder="Ej: Foobar">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="id_email" class="form-label">Correo electrónico <span
+                                    class="text-danger">*</span></label>
+                            <input type="email" class="form-control form-control-lg" id="id_email" name="email"
+                                placeholder="tucorreo@ejemplo.com" maxlength="200" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="id_subject" class="form-label">Motivo de la consulta <span
+                                    class="text-danger">*</span></label>
+                            <select class="form-select form-select-lg" id="id_subject" name="subject" required>
+                                <option value="">Selecciona una opción</option>
+                                <option value="pagos">Pagos y facturación</option>
+                                <option value="cursos">Información de cursos</option>
+                                <option value="empresas">Información para empresas</option>
+                                <option value="incidencias">Incidencias</option>
+                                <option value="colaboraciones">Colaboraciones</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="id_message" class="form-label">Consulta <span
+                                    class="text-danger">*</span></label>
+                            <textarea class="form-control form-control-lg" id="id_message" name="message" rows="5"
+                                placeholder="Escribe aquí tu consulta..." required></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="terms" required>
+                                <label class="form-check-label small" for="terms">
+                                    Aceptas que Foobar trate tus datos para personalizar el servicio ofrecido, enviarte
+                                    comunicaciones y realizar análisis. Puedes ejercer tus derechos escribiendo a <a
+                                        href="mailto:administracion@foobar.net"
+                                        class="text-info">administracion@foobar.net</a>.
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-center mt-3">
+                            <button type="submit" class="btn btn-danger btn-lg px-5 py-2 rounded-pill shadow-sm">
+                                Contactar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <div id="cestaCanvas" class="offcanvas offcanvas-end" tabindex="-1">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">Cesta de la compra</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div id="contenidoCestaCanvas" class="offcanvas-body">
+                <!-- JavaScript para generar la cesta de la compra -->
+            </div>
+        </div>
+
+        <div id="alertInicioSesion"
+            class="alert alert-success alert-dismissible fade show position-fixed top-0 end-0 m-3 mt-5 z-3" role="alert"
+            style="display: none;">
+            <i class="bi bi-check-circle-fill me-2"></i>Se ha iniciado sesión correctamente
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <div id="alertBienvenidoDeVuelta"
+            class="alert alert-success alert-dismissible fade show position-fixed top-0 end-0 m-3 mt-5 z-3" role="alert"
+            style="display: none;">
+            <i class="bi bi-check-circle-fill me-2"></i>Bienvenido de vuelta <span id="nombreUsuario"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <div id="alertCorrectoForm"
+            class="alert alert-success alert-dismissible fade show position-fixed top-0 end-0 m-3 mt-5 z-3" role="alert"
+            style="display: none;">
+            <i class="bi bi-check-circle-fill me-2"></i>Tu mensaje ha sido enviado correctamente
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <div id="alertFalloForm"
+            class="alert alert-danger alert-dismissible fade show position-fixed top-0 end-0 m-3 mt-5 z-3" role="alert"
+            style="display: none;">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>Ha ocurrido un error al enviar el mensaje
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </main>
+
+    <footer class="bg-fbo text-light pt-5">
+        <div class="container">
+            <div class="row gy-5">
+                <div class="col-lg-4 col-md-6 text-center text-md-start">
+                    <a href="/"
+                        class="d-inline-flex align-items-center mb-3 text-light text-decoration-none fs-4 fw-bold">
+                        <img src="assets/images/logo.png" alt="Logo de Foobar" width="40" height="40"
+                            class="d-inline-block align-text-top me-2">Foobar
+                    </a>
+                    <div class="mt-3">
+                        <p class="mb-2">Tel: +34 640 33 68 59</p>
+                        <p>Email: fernandobecerraortiz@suarezdefigueroa.es</p>
+                    </div>
+
+                    <div class="d-flex gap-3 mt-4 justify-content-center justify-content-md-start">
+                        <a class="btn btn-outline-light rounded-circle text-light fs-5 social-btn"><i
+                                class="bi bi-twitter-x"></i></a>
+                        <a class="btn btn-outline-light rounded-circle text-light fs-5 social-btn"><i
+                                class="bi bi-facebook"></i></a>
+                        <a class="btn btn-outline-light rounded-circle text-light fs-5 social-btn"><i
+                                class="bi bi-instagram"></i></a>
+                        <a class="btn btn-outline-light rounded-circle text-light fs-5 social-btn"><i
+                                class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 text-center text-md-start">
+                    <h5 class="fw-semibold">Enlaces</h5>
+                    <ul class="nav flex-column pt-2">
+                        <li class="nav-item mb-2"><a href="/" class="text-reset text-decoration-none">Inicio</a></li>
+                        <li class="nav-item mb-2"><a href="/cursos" class="text-reset text-decoration-none">Cursos</a></li>
+                        <li class="nav-item mb-2"><a href="/precios" class="text-reset text-decoration-none">Precios</a></li>
+                        <li class="nav-item mb-2"><a href="/contacto" class="text-reset text-decoration-none">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6 text-center text-md-start">
+                    <h5 class="fw-semibold ">Legal</h5>
+                    <ul class="nav flex-column pt-2">
+                        <li class="nav-item mb-2"><a href="" class="text-reset text-decoration-none">Accesibilidad</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href="" class="text-reset text-decoration-none">Cookies</a></li>
+                        <li class="nav-item mb-2"><a href="" class="text-reset text-decoration-none">Privacidad</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href="" class="text-reset text-decoration-none">Términos</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-top pt-4 mt-4 pb-3 text-center small">© 2025 Foobar. Todos los derechos reservados.</div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/contacto.js"></script>
+</body>
+</html>

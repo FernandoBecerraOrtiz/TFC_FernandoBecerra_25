@@ -1,0 +1,196 @@
+[2025-11-01T17:28:24+01:00] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP ffacd0b85a97d-429c10ff1besm9729108f8f.9 - gsmtp
+
+[2025-11-01T17:28:24+01:00] CLIENT -> SERVER: EHLO localhost
+
+[2025-11-01T17:28:24+01:00] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [87.218.122.105]
+250-SIZE 35882577
+250-8BITMIME
+250-STARTTLS
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[2025-11-01T17:28:24+01:00] CLIENT -> SERVER: STARTTLS
+
+[2025-11-01T17:28:24+01:00] SERVER -> CLIENT: 220 2.0.0 Ready to start TLS
+
+[2025-11-01T17:28:24+01:00] CLIENT -> SERVER: EHLO localhost
+
+[2025-11-01T17:28:25+01:00] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [87.218.122.105]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: AUTH LOGIN
+
+[2025-11-01T17:28:25+01:00] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: [credentials hidden]
+[2025-11-01T17:28:25+01:00] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: [credentials hidden]
+[2025-11-01T17:28:25+01:00] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: MAIL FROM:<fernandobecerraortiz@gmail.com>
+
+[2025-11-01T17:28:25+01:00] SERVER -> CLIENT: 250 2.1.0 OK ffacd0b85a97d-429c10ff1besm9729108f8f.9 - gsmtp
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: RCPT TO:<fbecerrao01@suarezdefigueroa.es>
+
+[2025-11-01T17:28:25+01:00] SERVER -> CLIENT: 250 2.1.5 OK ffacd0b85a97d-429c10ff1besm9729108f8f.9 - gsmtp
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: DATA
+
+[2025-11-01T17:28:25+01:00] SERVER -> CLIENT: 354 Go ahead ffacd0b85a97d-429c10ff1besm9729108f8f.9 - gsmtp
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: Date: Sat, 1 Nov 2025 17:28:24 +0100
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: To: Contacto Foobar <fbecerrao01@suarezdefigueroa.es>
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: From: Contacto Foobar <fernandobecerraortiz@gmail.com>
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: Reply-To: prueba <prueba@gmail.com>
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: Subject: Nueva consulta: pagos
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: Message-ID: <GQrf0Jr3xMiGSadXE1cofRpdplLuGCc3kSdwqCNVX0@localhost>
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: X-Mailer: PHPMailer 7.0.0 (https://github.com/PHPMailer/PHPMailer)
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: MIME-Version: 1.0
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: 
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: 
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: <h2>Nuevo mensaje desde el formulario de contacto Foobar</h2>
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: <p><strong>Nombre:</strong> prueba</p>
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: <p><strong>Empresa:</strong> prueba</p>
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: <p><strong>Email:</strong> prueba@gmail.com</p>
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: <p><strong>Asunto:</strong> pagos</p>
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: <p><strong>Mensaje:</strong><br>prueba</p>
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: <hr><small>Mensaje generado automáticamente por el formulario de Foobar.</small>
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: 
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: .
+
+[2025-11-01T17:28:25+01:00] SERVER -> CLIENT: 250 2.0.0 OK  1762014505 ffacd0b85a97d-429c10ff1besm9729108f8f.9 - gsmtp
+
+[2025-11-01T17:28:25+01:00] CLIENT -> SERVER: QUIT
+
+[2025-11-01T17:28:25+01:00] SERVER -> CLIENT: 221 2.0.0 closing connection ffacd0b85a97d-429c10ff1besm9729108f8f.9 - gsmtp
+
+[2025-11-15T19:34:34+01:00] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP ffacd0b85a97d-42b53e7ae16sm17202897f8f.3 - gsmtp
+
+[2025-11-15T19:34:34+01:00] CLIENT -> SERVER: EHLO localhost
+
+[2025-11-15T19:34:34+01:00] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [87.218.122.105]
+250-SIZE 35882577
+250-8BITMIME
+250-STARTTLS
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[2025-11-15T19:34:34+01:00] CLIENT -> SERVER: STARTTLS
+
+[2025-11-15T19:34:34+01:00] SERVER -> CLIENT: 220 2.0.0 Ready to start TLS
+
+[2025-11-15T19:34:34+01:00] CLIENT -> SERVER: EHLO localhost
+
+[2025-11-15T19:34:34+01:00] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [87.218.122.105]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[2025-11-15T19:34:34+01:00] CLIENT -> SERVER: AUTH LOGIN
+
+[2025-11-15T19:34:34+01:00] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[2025-11-15T19:34:34+01:00] CLIENT -> SERVER: [credentials hidden]
+[2025-11-15T19:34:34+01:00] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[2025-11-15T19:34:34+01:00] CLIENT -> SERVER: [credentials hidden]
+[2025-11-15T19:34:34+01:00] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[2025-11-15T19:34:34+01:00] CLIENT -> SERVER: MAIL FROM:<fernandobecerraortiz@gmail.com>
+
+[2025-11-15T19:34:34+01:00] SERVER -> CLIENT: 250 2.1.0 OK ffacd0b85a97d-42b53e7ae16sm17202897f8f.3 - gsmtp
+
+[2025-11-15T19:34:34+01:00] CLIENT -> SERVER: RCPT TO:<fbecerrao01@suarezdefigueroa.es>
+
+[2025-11-15T19:34:34+01:00] SERVER -> CLIENT: 250 2.1.5 OK ffacd0b85a97d-42b53e7ae16sm17202897f8f.3 - gsmtp
+
+[2025-11-15T19:34:34+01:00] CLIENT -> SERVER: DATA
+
+[2025-11-15T19:34:35+01:00] SERVER -> CLIENT: 354 Go ahead ffacd0b85a97d-42b53e7ae16sm17202897f8f.3 - gsmtp
+
+[2025-11-15T19:34:35+01:00] CLIENT -> SERVER: Date: Sat, 15 Nov 2025 19:34:34 +0100
+
+[2025-11-15T19:34:35+01:00] CLIENT -> SERVER: To: Contacto Foobar <fbecerrao01@suarezdefigueroa.es>
+
+[2025-11-15T19:34:35+01:00] CLIENT -> SERVER: From: Contacto Foobar <fernandobecerraortiz@gmail.com>
+
+[2025-11-15T19:34:35+01:00] CLIENT -> SERVER: Reply-To: fernando <fernando@gmail.com>
+
+[2025-11-15T19:34:35+01:00] CLIENT -> SERVER: Subject: Nueva consulta: empresas
+
+[2025-11-15T19:34:35+01:00] CLIENT -> SERVER: Message-ID: <CWgWlEikIAxQXX2gGTURWCplFWgYwMty8nyHxKIixyA@localhost>
+
+[2025-11-15T19:34:35+01:00] CLIENT -> SERVER: X-Mailer: PHPMailer 7.0.0 (https://github.com/PHPMailer/PHPMailer)
+
+[2025-11-15T19:34:35+01:00] CLIENT -> SERVER: MIME-Version: 1.0
+
+[2025-11-15T19:34:35+01:00] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[2025-11-15T19:34:35+01:00] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[2025-11-15T19:34:35+01:00] CLIENT -> SERVER: 
+
+[2025-11-15T19:34:35+01:00] CLIENT -> SERVER: 
+
+[2025-11-15T19:34:35+01:00] CLIENT -> SERVER: <h2>Nuevo mensaje desde el formulario de contacto Foobar</h2>
+
+[2025-11-15T19:34:35+01:00] CLIENT -> SERVER: <p><strong>Nombre:</strong> fernando</p>
+
+[2025-11-15T19:34:35+01:00] CLIENT -> SERVER: <p><strong>Empresa:</strong> lorem</p>
+
+[2025-11-15T19:34:35+01:00] CLIENT -> SERVER: <p><strong>Email:</strong> fernando@gmail.com</p>
+
+[2025-11-15T19:34:35+01:00] CLIENT -> SERVER: <p><strong>Asunto:</strong> empresas</p>
+
+[2025-11-15T19:34:35+01:00] CLIENT -> SERVER: <p><strong>Mensaje:</strong><br>email de tal</p>
+
+[2025-11-15T19:34:35+01:00] CLIENT -> SERVER: <hr><small>Mensaje generado automáticamente por el formulario de Foobar.</small>
+
+[2025-11-15T19:34:35+01:00] CLIENT -> SERVER: 
+
+[2025-11-15T19:34:35+01:00] CLIENT -> SERVER: .
+
+[2025-11-15T19:34:35+01:00] SERVER -> CLIENT: 250 2.0.0 OK  1763231674 ffacd0b85a97d-42b53e7ae16sm17202897f8f.3 - gsmtp
+
+[2025-11-15T19:34:35+01:00] CLIENT -> SERVER: QUIT
+
+[2025-11-15T19:34:35+01:00] SERVER -> CLIENT: 221 2.0.0 closing connection ffacd0b85a97d-42b53e7ae16sm17202897f8f.3 - gsmtp
+

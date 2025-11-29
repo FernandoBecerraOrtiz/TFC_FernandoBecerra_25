@@ -1,0 +1,45 @@
+services:
+  app:
+    image: fbecerrao/foobar_docker-app:latest
+    container_name: foobar_app
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_NAME=foobar
+      - DB_USER=foobar_user
+      - DB_PASS=foobar_pass
+
+  db:
+    image: fbecerrao/foobar-db:latest
+    container_name: foobar_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: foobar
+      MYSQL_USER: foobar_user
+      MYSQL_PASSWORD: foobar_pass
+      MYSQL_CHARSET: utf8mb4
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: foobar_phpmyadmin
+    restart: always
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: rootpass
+    ports:
+      - "8081:80"
+
+volumes:
+  db_data:

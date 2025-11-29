@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="assets/images/logo.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Space+Grotesk&display=swap" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/dashboard.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/3b65296541.js" crossorigin="anonymous"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/perfil.js"></script>
+    <script src="js/perfil.progress.js"></script>
+    <script src="js/administrador.js"></script>
+    <script src="js/color-modes.js"></script>
+    <title>Perfil</title>
+</head>
+<body id="bodyPerfil" class="d-flex flex-column">
+    <header>
+        <nav class="navbar navbar-expand-lg bg-fbo z-3">
+            <div class="container">
+                <!-- Eslogan -->
+                <a class="navbar-brand" href="/">
+                    <img src="assets/images/logo.png" alt="Logo de Foobar" width="30" height="30" class="d-inline-block align-text-top me-2">
+                    <span class="fw-bold text-white">Foobar</span>
+                </a>
+
+                <!-- Boton Menu hamburguesa -->
+                <button class="navbar-toggler border-white" type="button" data-bs-toggle="collapse" data-bs-target="#menuHamburguesa"
+                    aria-controls="menuHamburguesa">
+                    <span role="button"><i class="fa-solid fa-bars"></i></span>
+                </button>
+
+                <!-- Enlaces a otras páginas -->
+                <div class="collapse navbar-collapse text-white" id="menuHamburguesa">
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link text-white" href="/">Inicio</a>
+                        <a class="nav-link text-white" href="/cursos">Cursos</a>
+                        <a class="nav-link text-white" href="/precios">Precios</a>
+                        <a class="nav-link text-white" href="/contacto">Contacto</a>
+                        <button id="btnCesta" type="button" class="btn btn-outline-warning" data-bs-toggle="offcanvas" data-bs-target="#cestaCanvas">Cesta</button>
+                    </div>
+
+                    <!-- Boton para hacer login -->
+                    <div id="login" class="ms-lg-2 mt-sm-2 mt-lg-0" data-bs-toggle="modal" data-bs-target="#formularioLoginModal">
+                        <a class="btn btn btn-outline-danger text-white d-flex justify-content-center align-items-center" role="button">
+                            Iniciar sesión <i class="bi bi-person-circle fs-4 ms-2"></i>
+                        </a>
+                    </div>
+
+                    <!-- Botones gestion usuario -->
+                    <div id="perfil" class="ms-lg-2 mt-sm-2 mt-lg-0 dropdown d-none">
+                        <a class="btn btn-secondary dropdown-toggle nav-link" role="button" data-bs-toggle="dropdown">
+                            <!-- El nombre del usuario se coloca en javascript -->
+                        </a>
+
+                        <ul class="dropdown-menu text-small dropdown-fbo" data-popper-placement="bottom-start">
+                            <li><a class="dropdown-item" href="/perfil"><i class="bi bi-person me-2"></i>Perfil</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li id="cerrarSesion"><a class="dropdown-item"><i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Modal a mostrar al hacer click en "Login" -->
+        <div class="modal fade" id="formularioLoginModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex flex-column w-75 mx-auto">
+                        <h4 class="modal-title text-center mb-4 fs-4 fw-bold">Login de usuario</h4>
+
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="mail" placeholder="Email usuario" value="fernando@gmail.com">
+                            <label for="mail">Email usuario</label>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="form-floating flex-grow-1">
+                                <input type="password" class="form-control" id="pass" placeholder="Contraseña" value="123">
+                                <label for="pass">Contraseña</label>
+                            </div>
+                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                        <div class="form-check my-3 d-flex align-items-center">
+                            <input type="checkbox" class="form-check-input me-2" id="flexCheckDefault" checked>
+                            <label class="form-check-label" for="flexCheckDefault">Recuerdame</label>
+                        </div>
+                        <div id="alertaLogin" class="alert alert-danger d-flex align-items-center d-none" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            <div>Usuario o contraseña incorrectos</div>
+                        </div>
+                        <button id="modalLogin" type="button" class="btn btn-danger w-100 fs-5 mb-3">Iniciar sesión</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow-1">
+        <!-- Botón para abrir el sidebar en móviles -->
+        <div id="perfilMenuBtnWrap" class="d-md-none my-2 text-center d-none">
+            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
+                <i class="bi bi-list me-1"></i> Menú del perfil
+            </button>
+        </div>
+
+        <!-- Sidebar móvil (offcanvas) -->
+        <div class="offcanvas offcanvas-start d-md-none" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="sidebarOffcanvasLabel">Foobar — Menú</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+            </div>
+
+            <div class="offcanvas-body d-flex flex-column p-0 pt-2">
+
+                <!-- Navegación principal (móvil) -->
+                <ul class="nav flex-column mb-3">
+                    <li class="nav-item">
+                        <button class="nav-link d-flex align-items-center gap-2 js-nav" data-section="panel">
+                            <svg class="bi" aria-hidden="true">
+                                <use xlink:href="#house-fill"></use>
+                            </svg>
+                            Panel de usuario
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link d-flex align-items-center gap-2 js-nav" data-section="cursos">
+                            <svg class="bi" aria-hidden="true">
+                                <use xlink:href="#file-earmark"></use>
+                            </svg>
+                            Cursos
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link d-flex align-items-center gap-2 js-nav" data-section="certificados">
+                            <svg class="bi" aria-hidden="true">
+                                <use xlink:href="#icon-pdf"></use>
+                            </svg>
+                            Certificados
+                        </button>
+                    </li>
+                </ul>
+
+                <!-- Administración (móvil) — solo visible para profesor/admin -->
+                <section id="offcanvas-admin" class="d-none">
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-2 mb-1 text-body-secondary text-uppercase">
+                        <p class="mb-0">Administración</p>
+                    </h6>
+                    <ul class="nav flex-column mb-3">
+                        <li class="nav-item">
+                            <button class="nav-link d-flex align-items-center gap-2" data-section="modificar-curso" data-role="admin-link">
+                                <svg class="bi" aria-hidden="true">
+                                    <use xlink:href="#file-earmark-text"></use>
+                                </svg>
+                                Gestionar cursos
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link d-flex align-items-center gap-2" data-section="mostrar-alumnos" data-role="admin-link">
+                                <svg class="bi" aria-hidden="true">
+                                    <use xlink:href="#file-earmark-text"></use>
+                                </svg>
+                                Gestionar alumnos
+                            </button>
+                        </li>
+                    </ul>
+                </section>
+
+                <hr class="my-2" />
+
+                <ul class="nav flex-column mb-auto">
+                    <li class="nav-item">
+                        <button class="nav-link d-flex align-items-center gap-2 js-nav" data-section="ajustes">
+                            <svg class="bi" aria-hidden="true">
+                                <use xlink:href="#gear-wide-connected"></use>
+                            </svg>
+                            Ajustes
+                        </button>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+        <!-- Cambio de tema -->
+        <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+            <button class="btn btn-danger py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
+                aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
+                <svg class="bi my-1 theme-icon-active" aria-hidden="true">
+                    <use href="#circle-half"></use>
+                </svg>
+                <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+                <li>
+                    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
+                        aria-pressed="false">
+                        <svg class="bi me-2 opacity-50" aria-hidden="true">
+                            <use href="#sun-fill"></use>
+                        </svg>
+                        Claro
+                        <svg class="bi ms-auto d-none" aria-hidden="true">
+                            <use href="#check2"></use>
+                        </svg>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
+                        aria-pressed="false">
+                        <svg class="bi me-2 opacity-50" aria-hidden="true">
+                            <use href="#moon-stars-fill"></use>
+                        </svg>
+                        Oscuro
+                        <svg class="bi ms-auto d-none" aria-hidden="true">
+                            <use href="#check2"></use>
+                        </svg>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="dropdown-item d-flex align-items-center active"
+                        data-bs-theme-value="auto" aria-pressed="true">
+                        <svg class="bi me-2 opacity-50" aria-hidden="true">
+                            <use href="#circle-half"></use>
+                        </svg>
+                        Auto
+                        <svg class="bi ms-auto d-none" aria-hidden="true">
+                            <use href="#check2"></use>
+                        </svg>
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Iconos cambio de tema (claro, oscuro, auto) -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+            <symbol id="check2" viewBox="0 0 16 16">
+                <path
+                    d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z">
+                </path>
+            </symbol>
+            <symbol id="circle-half" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
+            </symbol>
+            <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+                <path
+                    d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z">
+                </path>
+                <path
+                    d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z">
+                </path>
+            </symbol>
+            <symbol id="sun-fill" viewBox="0 0 16 16">
+                <path
+                    d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z">
+                </path>
+            </symbol>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+            <symbol id="icon-pdf" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5zM1.6 11.85H0v3.999h.791v-1.342h.803q.43 0 .732-.173.305-.175.463-.474a1.4 1.4 0 0 0 .161-.677q0-.375-.158-.677a1.2 1.2 0 0 0-.46-.477q-.3-.18-.732-.179m.545 1.333a.8.8 0 0 1-.085.38.57.57 0 0 1-.238.241.8.8 0 0 1-.375.082H.788V12.48h.66q.327 0 .512.181.185.183.185.522m1.217-1.333v3.999h1.46q.602 0 .998-.237a1.45 1.45 0 0 0 .595-.689q.196-.45.196-1.084 0-.63-.196-1.075a1.43 1.43 0 0 0-.589-.68q-.396-.234-1.005-.234zm.791.645h.563q.371 0 .609.152a.9.9 0 0 1 .354.454q.118.302.118.753a2.3 2.3 0 0 1-.068.592 1.1 1.1 0 0 1-.196.422.8.8 0 0 1-.334.252 1.3 1.3 0 0 1-.483.082h-.563zm3.743 1.763v1.591h-.79V11.85h2.548v.653H7.896v1.117h1.606v.638z" />
+            </symbol>
+            <symbol id="file-earmark" viewBox="0 0 16 16">
+                <path
+                    d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z">
+                </path>
+            </symbol>
+            <symbol id="file-earmark-text" viewBox="0 0 16 16">
+                <path
+                    d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z">
+                </path>
+                <path
+                    d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z">
+                </path>
+            </symbol>
+            <symbol id="gear-wide-connected" viewBox="0 0 16 16">
+                <path
+                    d="M7.068.727c.243-.97 1.62-.97 1.864 0l.071.286a.96.96 0 0 0 1.622.434l.205-.211c.695-.719 1.888-.03 1.613.931l-.08.284a.96.96 0 0 0 1.187 1.187l.283-.081c.96-.275 1.65.918.931 1.613l-.211.205a.96.96 0 0 0 .434 1.622l.286.071c.97.243.97 1.62 0 1.864l-.286.071a.96.96 0 0 0-.434 1.622l.211.205c.719.695.03 1.888-.931 1.613l-.284-.08a.96.96 0 0 0-1.187 1.187l.081.283c.275.96-.918 1.65-1.613.931l-.205-.211a.96.96 0 0 0-1.622.434l-.071.286c-.243.97-1.62.97-1.864 0l-.071-.286a.96.96 0 0 0-1.622-.434l-.205.211c-.695.719-1.888.03-1.613-.931l.08-.284a.96.96 0 0 0-1.186-1.187l-.284.081c-.96.275-1.65-.918-.931-1.613l.211-.205a.96.96 0 0 0-.434-1.622l-.286-.071c-.97-.243-.97-1.62 0-1.864l.286-.071a.96.96 0 0 0 .434-1.622l-.211-.205c-.719-.695-.03-1.888.931-1.613l.284.08a.96.96 0 0 0 1.187-1.186l-.081-.284c-.275-.96.918-1.65 1.613-.931l.205.211a.96.96 0 0 0 1.622-.434l.071-.286zM12.973 8.5H8.25l-2.834 3.779A4.998 4.998 0 0 0 12.973 8.5zm0-1a4.998 4.998 0 0 0-7.557-3.779l2.834 3.78h4.723zM5.048 3.967c-.03.021-.058.043-.087.065l.087-.065zm-.431.355A4.984 4.984 0 0 0 3.002 8c0 1.455.622 2.765 1.615 3.678L7.375 8 4.617 4.322zm.344 7.646.087.065-.087-.065z">
+                </path>
+            </symbol>
+            <symbol id="graph-up" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z">
+                </path>
+            </symbol>
+            <symbol id="house-fill" viewBox="0 0 16 16">
+                <path
+                    d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z">
+                </path>
+                <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"></path>
+            </symbol>
+            <symbol id="list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+                </path>
+            </symbol>
+        </svg>
+
+        <!-- Botón de volver arriba -->
+        <button type="button" class="btn btn-danger btn-floating btn-lg" id="btn-back-to-top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+
+        <div class="container-fluid">
+            <div class="row" style="min-height: 60vh;">
+                <!-- Sidebar izquierdo de escritorio -->
+                <div id="izquierda" class="sidebar border border-right col-md-3 col-lg-1 p-0 bg-body-tertiary">
+                    <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu"
+                        aria-labelledby="sidebarMenuLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="sidebarMenuLabel">
+                                Foobar - Perfil de Usuario
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                data-bs-target="#sidebarMenu" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <button class="nav-link d-flex align-items-center gap-2" data-bs-toggle="pill"
+                                        data-bs-target="#seccion-panel">
+                                        <svg class="bi" aria-hidden="true">
+                                            <use xlink:href="#house-fill"></use>
+                                        </svg>
+                                        Panel de usuario
+                                    </button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link d-flex align-items-center gap-2" data-bs-toggle="pill"
+                                        data-bs-target="#seccion-cursos">
+                                        <svg class="bi" aria-hidden="true">
+                                            <use xlink:href="#file-earmark"></use>
+                                        </svg>
+                                        Cursos
+                                    </button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link d-flex align-items-center gap-2" data-bs-toggle="pill"
+                                        data-bs-target="#seccion-certificados">
+                                        <svg class="bi" aria-hidden="true">
+                                            <use xlink:href="#icon-pdf"></use>
+                                        </svg>
+                                        Certificados
+                                    </button>
+                                </li>
+                            </ul>
+                            <section id="seccion-admin" class="d-none">
+                                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
+                                    <p>Administración</p>
+                                </h6>
+                            <ul class="nav flex-column mb-auto">
+                                <li class="nav-item">
+                                    <button class="nav-link d-flex align-items-center gap-2" data-section="modificar-curso">
+                                        <svg class="bi" aria-hidden="true">
+                                            <use xlink:href="#file-earmark-text"></use>
+                                        </svg>
+                                        Gestionar cursos
+                                    </button>
+                                    <button class="nav-link d-flex align-items-center gap-2" data-section="mostrar-alumnos">
+                                        <svg class="bi" aria-hidden="true">
+                                            <use xlink:href="#file-earmark-text"></use>
+                                        </svg>
+                                        Mostrar alumnos
+                                    </button>
+                                </li>
+                            </ul>
+                            </section>
+                            <hr class="my-3" />
+                            <ul class="nav flex-column mb-auto">
+                                <li class="nav-item">
+                                    <button class="nav-link d-flex align-items-center gap-2" data-bs-toggle="pill"
+                                        data-bs-target="#seccion-ajustes">
+                                        <svg class="bi" aria-hidden="true">
+                                            <use xlink:href="#gear-wide-connected"></use>
+                                        </svg>
+                                        Ajustes
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contenido Derecho -->
+                <section id="derecha" class="col-md-9 col-lg-11 ms-sm-auto px-md-4">
+                    <div class="tab-content">
+                        <!-- Panel de usuario -->
+                        <section id="seccion-panel" class="container my-3 seccion-perfil">
+                            <div class="row g-3">
+                                <div class="col-12 col-md-3 transition">
+                                    <div class="card border-0 shadow rounded-4 bg-body-tertiary h-100">
+                                        <div class="card-body p-4 d-flex flex-column gap-1">
+                                            <div class="text-secondary mb-1"><i class="bi bi-collection-play fs-2"></i></div>
+                                            <div class="display-4 fw-bold lh-1" id="kpi-activos">0</div>
+                                            <div class="text-uppercase small text-secondary">Cursos activos</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3 transition">
+                                    <div class="card border-0 shadow rounded-4 bg-body-tertiary h-100">
+                                        <div class="card-body p-4 d-flex flex-column gap-1">
+                                            <div class="text-secondary mb-1"><i class="bi bi-patch-check fs-2"></i></div>
+                                            <div class="display-4 fw-bold lh-1" id="kpi-completados">0</div>
+                                            <div class="text-uppercase small text-secondary">Cursos completados</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3 transition">
+                                    <div class="card border-0 shadow rounded-4 bg-body-tertiary h-100">
+                                        <div class="card-body p-4 d-flex flex-column gap-1">
+                                            <div class="text-secondary mb-1"><i class="bi bi-journal-text fs-2"></i></div>
+                                            <div class="display-4 fw-bold lh-1" id="kpi-pendientes">0</div>
+                                            <div class="text-uppercase small text-secondary">Lecciones pendientes</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Mis cursos -->
+                        <section id="seccion-cursos" class="container my-3 seccion-perfil d-none">
+                            <div id="misCursos" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3"></div>
+                        </section>
+
+                        <section id="seccion-certificados" class="container my-3 seccion-perfil d-none">
+                            <div id="listaCertificados" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3"></div>
+                        </section>
+
+                        <!-- Ajustes de la cuenta -->
+                        <div id="seccion-ajustes" class="container my-3 seccion-perfil tab-pane fade" >
+                            <div class="card shadow-sm border-0">
+                                <div class="card-body">
+                                    <h2 class="h5 mb-4"><i class="bi bi-person-gear me-2"></i>Ajustes de cuenta</h2>
+                                    <form id="formAjustes" class="row g-3 col-xl-8">
+                                        <div class="col-12">
+                                            <label class="form-label">Nombre completo</label>
+                                            <input type="text" name="nombre" class="form-control" required>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label class="form-label">Foto de perfil (URL)</label>
+                                            <input type="text" name="foto_perfil" class="form-control"
+                                                placeholder="https://...">
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label class="form-label">Tecnologías favoritas</label>
+                                            <input type="text" name="tecnologias" class="form-control"
+                                                placeholder="HTML, CSS, JS...">
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label class="form-label">Twitter</label>
+                                            <input type="text" name="twitter" class="form-control"
+                                                placeholder="usuario">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">GitHub</label>
+                                            <input type="text" name="github" class="form-control" placeholder="usuario">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Instagram</label>
+                                            <input type="text" name="instagram" class="form-control"
+                                                placeholder="usuario">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">LinkedIn</label>
+                                            <input type="text" name="linkedin" class="form-control"
+                                                placeholder="usuario">
+                                        </div>
+
+                                        <div class="col-12">
+                                            <button class="btn btn-danger mt-2">
+                                                <i class="bi bi-save me-1"></i> Guardar cambios
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Vista de curso/lección -->
+                        <section id="seccion-curso" class="container my-3 d-none">
+                            <div class="row g-2 align-items-center mb-3">
+                                <div class="col-12 col-md-auto">
+                                    <button type="button" class="btn btn-outline-secondary w-100 js-volver-cursos">
+                                        ← Volver a Mis cursos
+                                    </button>
+                                </div>
+                                <div class="col-12 col-md-6 ms-md-auto">
+                                    <div class="progress" role="progressbar" aria-label="Progreso del curso"
+                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                        <div id="progresoCursoBar" class="progress-bar" style="width:0%"></div>
+                                    </div>
+                                    <div class="text-end small text-muted mt-1">
+                                        <span id="progresoCursoPct">0%</span> completado
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h4 class="mb-3" id="tituloCursoActual" data-curso-id="">Curso</h4>
+
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="card border-0 shadow-sm">
+                                        <div class="card-header bg-body-tertiary">Lecciones</div>
+                                        <div class="list-group list-group-flush" id="leccionesList"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card border-0 shadow-sm mb-3">
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-3" id="tituloLeccion">Lección</h5>
+                                            <div id="videoWrapper" class="mb-3 d-none">
+                                                <div class="ratio ratio-16x9">
+                                                    <iframe id="videoIframe" src="" title="Video"
+                                                        allowfullscreen></iframe>
+                                                </div>
+                                            </div>
+                                            <div id="contenidoLeccion" class="mb-3"></div>
+                                            <button id="btnToggleCompletada" type="button"
+                                                class="btn btn-outline-success">
+                                                <i class="bi bi-check2-circle me-1"></i> Marcar lección como completada
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row g-3">
+                                        <!-- Notas -->
+                                        <div class="col-md-6">
+                                            <div class="card border-0 shadow-sm h-100">
+                                                <div
+                                                    class="card-header bg-body-tertiary d-flex align-items-center justify-content-between">
+                                                    <span>Notas de la lección</span>
+                                                    <small id="notaGuardadaInfo"
+                                                        class="text-success d-none">Guardado</small>
+                                                </div>
+                                                <div class="card-body">
+                                                    <textarea id="notaLeccion" class="form-control" rows="6"
+                                                        placeholder="Escribe tus notas..."></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Quiz -->
+                                        <div class="col-md-6">
+                                            <div class="card border-0 shadow-sm h-100">
+                                                <div class="card-header bg-body-tertiary">Auto-quiz</div>
+                                                <div class="card-body">
+                                                    <div id="quizZone" class="mb-2"></div>
+                                                    <div class="d-flex gap-2">
+                                                        <button type="button" class="btn btn-danger"
+                                                            id="btnQuizCheck">Comprobar</button>
+                                                        <button type="button" class="btn btn-outline-secondary"
+                                                            id="btnQuizReset">Reiniciar</button>
+                                                    </div>
+                                                    <div id="quizFeedback" class="mt-2 small"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Playground -->
+                                        <div class="col-12">
+                                            <div class="card border-0 shadow-sm">
+                                                <div class="card-header bg-body-tertiary">Playground (HTML/CSS/JS)</div>
+                                                <div class="card-body">
+                                                    <div class="row g-2">
+                                                        <div class="col-md-4">
+                                                            <label class="form-label">HTML</label>
+                                                            <textarea id="playHtml" class="form-control" rows="6"
+                                                                placeholder="<h1>Hola</h1>"></textarea>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label class="form-label">CSS</label>
+                                                            <textarea id="playCss" class="form-control" rows="6"
+                                                                placeholder="h1 { color: tomato; }"></textarea>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label class="form-label">JS</label>
+                                                            <textarea id="playJs" class="form-control" rows="6"
+                                                                placeholder="console.log('Hello');"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-end mt-2">
+                                                        <button type="button" id="btnPlayRun"
+                                                            class="btn btn-dark">Ejecutar</button>
+                                                    </div>
+                                                    <div class="ratio ratio-16x9 mt-3">
+                                                        <iframe id="playOutput" title="Playground output"></iframe>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Sección curso-lecciones -->
+                        <section id="seccion-curso" class="d-none">
+                            <div class="container-fluid py-4">
+                                <div class="row g-3">
+
+                                    <!-- Sidebar tipo List group -->
+                                    <aside class="col-12 col-md-4 col-lg-3 col-xl-2">
+                                        <div id="sidebar-fbo" class="border rounded-3 shadow-sm bg-body">
+                                            <div
+                                                class="p-3 border-bottom bg-body-tertiary d-flex align-items-center justify-content-between">
+                                                <div class="d-flex align-items-center">
+                                                    <i class="bi bi-list-task me-2"></i>
+                                                    <h2 class="h6 mb-0">Lecciones</h2>
+                                                </div>
+                                                <button id="volverCursos"
+                                                    class="btn btn-sm btn-outline-secondary">Volver</button>
+                                            </div>
+
+                                            <div class="p-3 border-bottom">
+                                                <div class="input-group input-group-sm">
+                                                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                                                    <input id="filterLessons" type="text" class="form-control"
+                                                        placeholder="Filtrar lecciones...">
+                                                </div>
+                                            </div>
+
+                                            <div id="leccionesList" class="list-group list-group-flush">
+                                                <!-- Relleno dinámico por JS -->
+                                            </div>
+                                        </div>
+                                    </aside>
+
+                                    <!-- Contenido de la lección -->
+                                    <section class="col-12 col-md-8 col-lg-9 col-xl-10">
+                                        <div class="card shadow-sm border-0">
+                                            <div class="card-body">
+
+                                                <!-- Cabecera del curso y de la lección -->
+                                                <div class="mb-2">
+                                                    <div class="text-muted small">Curso</div>
+                                                    <h2 id="tituloCursoActual" class="h5 mb-3" data-curso-id=""></h2>
+                                                </div>
+
+                                                <!-- Título de la lección algo más grande -->
+                                                <h1 id="tituloLeccion" class="h4 mb-3" data-leccion-id=""></h1>
+
+                                                <!-- Vídeo (si lo hay) con tamaño agradable -->
+                                                <div id="videoWrapper"
+                                                    class="ratio ratio-16x9 d-none mb-3 rounded overflow-hidden">
+                                                    <iframe id="videoIframe" src="" title="Lección en video"
+                                                        allowfullscreen></iframe>
+                                                </div>
+
+                                                <!-- Contenido -->
+                                                <div id="contenidoLeccion" class="lh-base">
+                                                    <div id="placeholderLeccion" class="text-muted">
+                                                        Selecciona una lección de la lista de la izquierda para empezar.
+                                                    </div>
+                                                    <!-- Interacción extra: progreso, notas, quiz y playground -->
+                                                    <hr class="my-4">
+
+                                                    <!-- Barra de progreso del curso + botón completar lección -->
+                                                    <div
+                                                        class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+                                                        <div class="flex-grow-1 me-3">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between mb-1">
+                                                                <span class="small text-muted">Progreso del curso</span>
+                                                                <span class="small" id="progresoCursoPct">0%</span>
+                                                            </div>
+                                                            <div class="progress" role="progressbar"
+                                                                aria-label="Progreso del curso">
+                                                                <div id="progresoCursoBar"
+                                                                    class="progress-bar bg-success" style="width:0%">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <button id="btnToggleCompletada" type="button"
+                                                            class="btn btn-outline-success">
+                                                            <i class="bi bi-check2-circle me-1"></i> Marcar lección como
+                                                            completada
+                                                        </button>
+                                                    </div>
+
+                                                    <!-- Tabs de utilidades -->
+                                                    <ul class="nav nav-tabs" id="tabsCursoExtras" role="tablist">
+                                                        <li class="nav-item" role="presentation">
+                                                            <button class="nav-link active" id="tab-notas"
+                                                                data-bs-toggle="tab" data-bs-target="#pane-notas"
+                                                                type="button" role="tab">Notas</button>
+                                                        </li>
+                                                        <li class="nav-item" role="presentation">
+                                                            <button class="nav-link" id="tab-quiz" data-bs-toggle="tab"
+                                                                data-bs-target="#pane-quiz" type="button"
+                                                                role="tab">Quiz rápido</button>
+                                                        </li>
+                                                        <li class="nav-item" role="presentation">
+                                                            <button class="nav-link" id="tab-play" data-bs-toggle="tab"
+                                                                data-bs-target="#pane-play" type="button"
+                                                                role="tab">Playground</button>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="tab-content border border-top-0 rounded-bottom p-3 bg-body"
+                                                        id="tabContentCursoExtras">
+                                                        <!-- Notas -->
+                                                        <div class="tab-pane fade show active" id="pane-notas"
+                                                            role="tabpanel" aria-labelledby="tab-notas">
+                                                            <label for="notaLeccion"
+                                                                class="form-label small text-muted">Tus notas de esta
+                                                                lección</label>
+                                                            <textarea id="notaLeccion" class="form-control" rows="4"
+                                                                placeholder="Escribe aquí tus apuntes..."></textarea>
+                                                            <div class="text-end mt-2">
+                                                                <small id="notaGuardadaInfo"
+                                                                    class="text-success d-none">Notas guardadas</small>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Quiz -->
+                                                        <div class="tab-pane fade" id="pane-quiz" role="tabpanel"
+                                                            aria-labelledby="tab-quiz">
+                                                            <div id="quizZone">
+                                                                <!-- El JS insertará aquí las preguntas -->
+                                                            </div>
+                                                            <div class="d-flex gap-2 mt-3">
+                                                                <button id="btnQuizCheck" type="button"
+                                                                    class="btn btn-danger">Comprobar</button>
+                                                                <button id="btnQuizReset" type="button"
+                                                                    class="btn btn-outline-secondary">Reiniciar</button>
+                                                                <div id="quizFeedback" class="ms-auto small"></div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Playground -->
+                                                        <div class="tab-pane fade" id="pane-play" role="tabpanel"
+                                                            aria-labelledby="tab-play">
+                                                            <div class="row g-3">
+                                                                <div class="col-12 col-lg-4">
+                                                                    <label class="form-label">HTML</label>
+                                                                    <textarea id="playHtml" class="form-control"
+                                                                        rows="6"
+                                                                        placeholder="&lt;h1&gt;Hola&lt;/h1&gt;"></textarea>
+                                                                </div>
+                                                                <div class="col-12 col-lg-4">
+                                                                    <label class="form-label">CSS</label>
+                                                                    <textarea id="playCss" class="form-control" rows="6"
+                                                                        placeholder="h1 { font-family: sans-serif; }"></textarea>
+                                                                </div>
+                                                                <div class="col-12 col-lg-4">
+                                                                    <label class="form-label">JS</label>
+                                                                    <textarea id="playJs" class="form-control" rows="6"
+                                                                        placeholder="console.log('Hola');"></textarea>
+                                                                </div>
+                                                                <div class="col-12 d-flex justify-content-end">
+                                                                    <button id="btnPlayRun" type="button"
+                                                                        class="btn btn-success">Ejecutar</button>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div
+                                                                        class="ratio ratio-16x9 border rounded overflow-hidden bg-white">
+                                                                        <iframe id="playOutput" title="Playground"
+                                                                            sandbox="allow-scripts"
+                                                                            referrerpolicy="no-referrer"></iframe>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Alumnos (solo admin/profesor) -->
+                        <section id="seccion-alumnos" class="container my-3 seccion-perfil d-none">
+                            <div class="card border-0 shadow">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center justify-content-between mb-3">
+                                        <h4 class="mb-0">
+                                            <i class="bi bi-people me-2"></i>Gestionar alumnos
+                                        </h4>
+                        
+                                        <div class="d-flex align-items-center gap-2">
+                                            <!-- Botón solo para admin (se muestra/oculta desde JS) -->
+                                            <button id="btnNuevoAlumno" type="button" class="btn btn-danger btn-sm d-none">
+                                                <i class="bi bi-person-plus-fill me-1"></i>Nuevo usuario
+                                            </button>
+                        
+                                            <!-- Filtro simple -->
+                                            <div class="input-group input-group-sm w-100">
+                                                <span class="input-group-text"><i class="bi bi-search"></i></span>
+                                                <input id="filtroAlumnos" type="text" class="form-control" placeholder="Filtrar por nombre o email...">
+                                            </div>
+                                        </div>
+                                    </div>
+                        
+                                    <div class="table-responsive">
+                                        <table class="table table-hover align-middle mb-0" id="tablaAlumnos">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Nombre</th>
+                                                    <th>Email</th>
+                                                    <th>Tipo</th>
+                                                    <th>Fecha registro</th>
+                                                    <th>Curso</th>
+                                                    <th>Progreso</th>
+                                                    <th class="text-end">Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="8" class="text-muted">Cargando...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        
+                    </div>
+                </section>
+            </div>
+
+        </div>
+
+        <div id="cestaCanvas" class="offcanvas offcanvas-end" tabindex="-1">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">Cesta de la compra</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div id="contenidoCestaCanvas" class="offcanvas-body">
+                <!-- JavaScript para generar la cesta de la compra -->
+            </div>
+        </div>
+
+        <div id="alertInicioSesion"
+            class="alert alert-success alert-dismissible fade show position-fixed top-0 end-0 m-3 mt-5 z-3" role="alert"
+            style="display: none;">
+            <i class="bi bi-check-circle-fill me-2"></i>Se ha iniciado sesión correctamente
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <div id="alertBienvenidoDeVuelta"
+            class="alert alert-success alert-dismissible fade show position-fixed top-0 end-0 m-3 mt-5 z-3" role="alert"
+            style="display: none;">
+            <i class="bi bi-check-circle-fill me-2"></i>Bienvenido de vuelta <span id="nombreUsuario"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <div id="alertDatosActualizados"
+            class="alert alert-success alert-dismissible fade show position-fixed top-0 end-0 m-3 mt-5 z-3" role="alert"
+            style="display: none;">
+            <i class="bi bi-check-circle-fill me-2"></i>Datos actualizados correctamente
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <div id="alertaAdminGlobal" class="alert alert-danger d-flex align-items-center d-none position-fixed top-0 end-0 m-3 shadow z-3 w-75">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            <span id="alertaAdminGlobalTexto"></span>
+        </div>
+
+        <div class="modal fade" id="modalEliminarCursoAdmin" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title">Eliminar curso</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="mb-0">¿Seguro que quieres eliminar este curso?</p>
+                        <p class="fw-bolder">Esta acción no se puede deshacer.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+                            id="noDeleteCurso">Cancelar</button>
+                        <button type="button" class="btn btn-danger" id="confirmDeleteCurso">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalAlumnoAdmin" tabindex="-1">
+            <div class="modal-dialog">
+                <form id="formAlumnoAdmin" class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalAlumnoAdminLabel">Nuevo usuario</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="alumno_id">
+                        <input type="hidden" name="accion" id="alumno_accion">
+        
+                        <div class="mb-3">
+                            <label for="alumno_nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" name="nombre" id="alumno_nombre" required>
+                        </div>
+        
+                        <div class="mb-3">
+                            <label for="alumno_email" class="form-label">Email (.com / .es)</label>
+                            <input type="email" class="form-control" name="email" id="alumno_email" required>
+                        </div>
+        
+                        <div class="mb-3">
+                            <label for="alumno_tipo" class="form-label">Tipo de usuario</label>
+                            <select class="form-select" name="tipo" id="alumno_tipo" required>
+                                <option value="estudiante">Estudiante</option>
+                                <option value="profesor">Profesor</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+        
+                        <div class="mb-3">
+                            <label for="alumno_password" class="form-label">
+                                Contraseña (dejar vacío para mantener la actual)
+                            </label>
+                            <input type="password" class="form-control" name="password" id="alumno_password">
+                            <div class="form-text">
+                                Para nuevos usuarios es recomendable establecer una contraseña
+                                (se guardará cifrada en la base de datos).
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-danger">
+                            Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalEliminarUsuarioAdmin" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow">
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title">Confirmar eliminación</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+        
+                    <div class="modal-body">
+                        <p class="mb-0">¿Seguro que quieres eliminar este usuario?</p>
+                        <p class="fw-bolder">Esta acción no se puede deshacer.</p>
+                    </div>
+        
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger" id="btnConfirmEliminarUsuarioAdmin">
+                            Eliminar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalDarDeBajaUsuarioProfesor" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow">
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title">Confirmar dar de baja</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+        
+                    <div class="modal-body">
+                        <p class="mb-0">¿Seguro que quieres dar de baja este usuario?</p>
+                        <p class="fw-bolder">Esta acción no se puede deshacer.</p>
+                    </div>
+        
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger" id="btnConfirmDarDeBajaUsuarioProfesor">
+                            Dar de baja
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-fbo text-light pt-5 border-top">
+        <div class="container">
+            <div class="row gy-5">
+                <div class="col-lg-4 col-md-6 text-center text-md-start">
+                    <a href="/"
+                        class="d-inline-flex align-items-center mb-3 text-light text-decoration-none fs-4 fw-bold">
+                        <img src="assets/images/logo.png" alt="Logo de Foobar" width="40" height="40"
+                            class="d-inline-block align-text-top me-2">Foobar
+                    </a>
+                    <div class="mt-3">
+                        <p class="mb-2">Tel: +34 640 33 68 59</p>
+                        <p>Email: fernandobecerraortiz@suarezdefigueroa.es</p>
+                    </div>
+
+                    <div class="d-flex gap-3 mt-4 justify-content-center justify-content-md-start">
+                        <a class="btn btn-outline-light rounded-circle text-light fs-5 social-btn"><i class="bi bi-twitter-x"></i></a>
+                        <a class="btn btn-outline-light rounded-circle text-light fs-5 social-btn"><i class="bi bi-facebook"></i></a>
+                        <a class="btn btn-outline-light rounded-circle text-light fs-5 social-btn"><i class="bi bi-instagram"></i></a>
+                        <a class="btn btn-outline-light rounded-circle text-light fs-5 social-btn"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 text-center text-md-start">
+                    <h5 class="fw-semibold">Enlaces</h5>
+                    <ul class="nav flex-column pt-2">
+                        <li class="nav-item mb-2"><a href="/" class="text-reset text-decoration-none">Inicio</a></li>
+                        <li class="nav-item mb-2"><a href="/cursos" class="text-reset text-decoration-none">Cursos</a></li>
+                        <li class="nav-item mb-2"><a href="/precios" class="text-reset text-decoration-none">Precios</a></li>
+                        <li class="nav-item mb-2"><a href="/contacto" class="text-reset text-decoration-none">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6 text-center text-md-start">
+                    <h5 class="fw-semibold ">Legal</h5>
+                    <ul class="nav flex-column pt-2">
+                        <li class="nav-item mb-2"><a href="" class="text-reset text-decoration-none">Accesibilidad</a></li>
+                        <li class="nav-item mb-2"><a href="" class="text-reset text-decoration-none">Cookies</a></li>
+                        <li class="nav-item mb-2"><a href="" class="text-reset text-decoration-none">Privacidad</a></li>
+                        <li class="nav-item mb-2"><a href="" class="text-reset text-decoration-none">Términos</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-top pt-4 mt-4 pb-3 text-center small">© 2025 Foobar. Todos los derechos reservados.</div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js"
+        integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"
+        class="astro-vvvwv3sm"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>

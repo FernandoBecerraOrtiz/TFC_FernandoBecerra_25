@@ -1,0 +1,372 @@
+* {
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+footer {
+    flex-shrink: 0;
+}
+
+/* Colores propios y modificaciones de clases de bootstrap*/
+
+.text-fbo {
+    color: #111827;
+}
+
+.bg-fbo {
+    background-color: #111827;
+}
+
+.text-fbo-red {
+    color: #D11F3D;
+}
+
+.bg-fbo-red {
+    background-color: #D11F3D;
+}
+
+.bg-fbo-aux {
+    background-color: #422657;
+}
+
+.social-hover-fbo:hover {
+    color: #111827;
+}
+
+/* Colores bootstrap */
+
+.fa-bars {
+    color: white;
+}
+
+.navbar-toggler {
+    border-color: white;
+}
+
+.navbar-toggler-icon {
+    background-color: white;
+}
+
+/* =========== CSS nativo =========== */
+
+#btn-back-to-top {
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+    display: none;
+}
+
+/* Dropdown navbar */
+
+.dropdown-fbo {
+    transform: translate(105px, 2px);
+}
+
+/* Hero sections */
+
+#contacto {
+    background-color: #212529;
+    background-image: url("../assets/images/map-image.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.height-fbo {
+    height: 70vh;
+}
+
+.hero,
+.hero2 {
+    height: 70vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/images/hero1.webp');
+}
+
+.hero2 {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/images/hero2.webp');
+}
+
+/* Botones play/pause video */
+
+.btn-fbo {
+    bottom: 250px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+}
+
+/* Diapositivas precios.html */
+
+.slide-bottom-fbo {
+    bottom: 4.5rem;
+}
+
+.carousel-caption-fbo {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Marquee index.html */
+.marquee {
+    font-size: 4vw;
+}
+
+.animate-marquee {
+    animation: slide-left 60s linear infinite;
+}
+
+@keyframes slide-left {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Cards index.html */
+
+.team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.transition {
+    transition: all 0.3s ease;
+}
+
+/* Iconos redes sociales index.html */
+
+.social-btn,
+.social-btn-inv {
+    transition: all 0.3s ease;
+}
+
+.social-btn:hover i {
+    color: #111827;
+}
+
+.social-btn-inv:hover i {
+    color: #fff;
+}
+
+/* Testimonios cursos.html */
+
+.testimonial-card .card-up {
+    height: 120px;
+    overflow: hidden;
+    border-radius: 0.25rem;
+}
+
+.testimonial-card .avatar {
+    width: 110px;
+    margin-top: -60px;
+    overflow: hidden;
+    border: 3px solid #fff;
+    border-radius: 50%;
+}
+
+/* Ancho formulario contacto.html */
+
+.width-contact {
+    max-width: 1140px;
+}
+
+/* Personalizar pagina de configuracion */
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+.b-example-divider {
+    width: 100%;
+    height: 3rem;
+    background-color: #0000001a;
+    border: solid rgba(0, 0, 0, 0.15);
+    border-width: 1px 0;
+    box-shadow: inset 0 0.5em 1.5em #0000001a, inset 0 0.125em 0.5em #00000026;
+}
+
+.b-example-vr {
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 100vh;
+}
+
+.bi {
+    vertical-align: -0.125em;
+    fill: currentColor;
+}
+
+.nav-scroller {
+    position: relative;
+    z-index: 2;
+    height: 2.75rem;
+    overflow-y: hidden;
+}
+
+.nav-scroller .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-bottom: 1rem;
+    margin-top: -1px;
+    overflow-x: auto;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.bd-mode-toggle {
+    z-index: 1500;
+}
+
+.bd-mode-toggle .bi {
+    width: 1em;
+    height: 1em;
+}
+
+.bd-mode-toggle .dropdown-menu .active .bi {
+    display: block !important;
+}
+
+.social-btn .bi {
+    display: inline !important;
+}
+
+.sidebar .nav-link svg {
+    fill: #D11F3D;
+    color: #D11F3D;
+}
+
+.sidebar .nav-link {
+    color: #111827;
+}
+
+.sidebar .sidebar-heading,
+.sidebar .link-secondary,
+.sidebar .dropdown-item {
+    color: #111827;
+}
+
+/* Sidebar móvil: que se vea igual que el sidebar de escritorio */
+#sidebarOffcanvas .nav-link {
+    padding: 12px 16px;
+    font-size: 1rem;
+    color: var(--bs-body-color);
+}
+
+#sidebarOffcanvas .sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+    color: #6c757d;
+    margin-top: 1rem;
+}
+
+/* Mantener misma separación que escritorio */
+#sidebarOffcanvas ul.nav li.nav-item {
+    margin-bottom: .25rem;
+}
+
+/* Igualar iconos del sidebar */
+#sidebarOffcanvas svg.bi {
+    width: 20px;
+    height: 20px;
+    color: #D11F3D;
+}
+
+/* En modo oscuro, el texto del panel lateral se vuelve blanco */
+[data-bs-theme="dark"] .sidebar .nav-link,
+[data-bs-theme="dark"] .sidebar .sidebar-heading,
+[data-bs-theme="dark"] .sidebar .link-secondary,
+[data-bs-theme="dark"] .sidebar .dropdown-item {
+    color: #fff;
+}
+
+/* Botón del selector de modo */
+[data-bs-theme="light"] #bd-theme {
+    background-color: #D11F3D;
+    color: #111827;
+    border: none;
+}
+
+[data-bs-theme="dark"] #bd-theme {
+    background-color: #111827;
+    color: #D11F3D;
+    border: none;
+}
+
+/* Curso extras */
+#tabsCursoExtras .nav-link {
+    font-weight: 600;
+}
+
+#tabContentCursoExtras {
+    border-color: rgba(0, 0, 0, .125);
+}
+
+[data-bs-theme="dark"] #tabContentCursoExtras {
+    border-color: rgba(255, 255, 255, .15);
+}
+
+/* Ajustes minimos */
+
+#playOutput {
+    background: #fff;
+}
+
+.form-signin {
+    max-width: 350px;
+}
+
+#c_categorias {
+    height: 300px;
+}
+
+#bodyPerfil {
+    background-color: rgb(247, 247, 247);
+    background-image: url('../assets/images/iconsBg.svg');
+}
+
+@media (max-width: 768px){
+    #izquierda {
+        display: none;
+    }
+}

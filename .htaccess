@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# Permitir que los ficheros y directorios reales funcionen normalmente
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Quitar .html de la URL
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L]
+
+# Forzar UTF-8 en todo el sitio
+AddDefaultCharset utf-8

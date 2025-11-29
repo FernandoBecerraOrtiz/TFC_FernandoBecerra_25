@@ -1,0 +1,12 @@
+.git
+.gitignore
+node_modules
+vendor
+docker-compose.yml
+Dockerfile
+docker/
+*.log
+.idea
+.vscode
+nbproject
+*.zip

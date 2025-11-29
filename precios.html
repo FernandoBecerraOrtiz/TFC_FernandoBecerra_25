@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="assets/images/logo.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Space+Grotesk&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/3b65296541.js" crossorigin="anonymous"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/color-modes.js"></script>
+    <title>Foobar</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-fbo z-3">
+            <div class="container">
+                <!-- Eslogan -->
+                <a class="navbar-brand" href="/">
+                    <img src="assets/images/logo.png" alt="Logo de Foobar" width="30" height="30" class="d-inline-block align-text-top me-2">
+                    <span class="fw-bold text-white">Foobar</span>
+                </a>
+
+                <!-- Boton Menu hamburguesa -->
+                <button class="navbar-toggler border-white" type="button" data-bs-toggle="collapse" data-bs-target="#menuHamburguesa"
+                    aria-controls="menuHamburguesa">
+                    <span role="button"><i class="fa-solid fa-bars"></i></span>
+                </button>
+
+                <!-- Enlaces a otras páginas -->
+                <div class="collapse navbar-collapse text-white" id="menuHamburguesa">
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link text-white" href="/">Inicio</a>
+                        <a class="nav-link text-white" href="/cursos">Cursos</a>
+                        <a class="nav-link text-white" href="/precios">Precios</a>
+                        <a class="nav-link text-white" href="/contacto">Contacto</a>
+                        <button id="btnCesta" type="button" class="btn btn-outline-warning" data-bs-toggle="offcanvas" data-bs-target="#cestaCanvas">Cesta</button>
+                    </div>
+
+                    <!-- Boton para hacer login -->
+                    <div id="login" class="ms-lg-2 mt-sm-2 mt-lg-0" data-bs-toggle="modal" data-bs-target="#formularioLoginModal">
+                        <a class="btn btn btn-outline-danger text-white d-flex justify-content-center align-items-center" role="button">
+                            Iniciar sesión <i class="bi bi-person-circle fs-4 ms-2"></i>
+                        </a>
+                    </div>
+
+                    <!-- Botones gestion usuario -->
+                    <div id="perfil" class="ms-lg-2 mt-sm-2 mt-lg-0 dropdown d-none">
+                        <a class="btn btn-secondary dropdown-toggle nav-link" role="button" data-bs-toggle="dropdown">
+                            <!-- El nombre del usuario se coloca en javascript -->
+                        </a>
+
+                        <ul class="dropdown-menu text-small dropdown-fbo" data-popper-placement="bottom-start">
+                            <li><a class="dropdown-item" href="/perfil"><i class="bi bi-person me-2"></i>Perfil</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li id="cerrarSesion"><a class="dropdown-item"><i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Modal a mostrar al hacer click en "Login" -->
+        <div class="modal fade" id="formularioLoginModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex flex-column w-75 mx-auto">
+                        <h4 class="modal-title text-center mb-4 fs-4 fw-bold">Login de usuario</h4>
+
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="mail" placeholder="Email usuario" value="adminfoobar@gmail.com">
+                            <label for="mail">Email usuario</label>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="form-floating flex-grow-1">
+                                <input type="password" class="form-control" id="pass" placeholder="Contraseña" value="admin">
+                                <label for="pass">Contraseña</label>
+                            </div>
+                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                        <div class="form-check my-3 d-flex align-items-center">
+                            <input type="checkbox" class="form-check-input me-2" id="flexCheckDefault" checked>
+                            <label class="form-check-label" for="flexCheckDefault">Recuerdame</label>
+                        </div>
+                        <div id="alertaLogin" class="alert alert-danger d-flex align-items-center d-none" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            <div>Usuario o contraseña incorrectos</div>
+                        </div>
+                        <button id="modalLogin" type="button" class="btn btn-danger w-100 fs-5 mb-3">Iniciar sesión</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Cambio de tema -->
+        <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+            <button class="btn btn-danger py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
+                aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
+                <svg class="bi my-1 theme-icon-active" aria-hidden="true">
+                    <use href="#circle-half"></use>
+                </svg>
+                <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+                <li>
+                    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
+                        aria-pressed="false">
+                        <svg class="bi me-2 opacity-50" aria-hidden="true">
+                            <use href="#sun-fill"></use>
+                        </svg>
+                        Claro
+                        <svg class="bi ms-auto d-none" aria-hidden="true">
+                            <use href="#check2"></use>
+                        </svg>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
+                        aria-pressed="false">
+                        <svg class="bi me-2 opacity-50" aria-hidden="true">
+                            <use href="#moon-stars-fill"></use>
+                        </svg>
+                        Oscuro
+                        <svg class="bi ms-auto d-none" aria-hidden="true">
+                            <use href="#check2"></use>
+                        </svg>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="dropdown-item d-flex align-items-center active"
+                        data-bs-theme-value="auto" aria-pressed="true">
+                        <svg class="bi me-2 opacity-50" aria-hidden="true">
+                            <use href="#circle-half"></use>
+                        </svg>
+                        Auto
+                        <svg class="bi ms-auto d-none" aria-hidden="true">
+                            <use href="#check2"></use>
+                        </svg>
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Iconos cambio de tema (claro, oscuro, auto) -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+            <symbol id="check2" viewBox="0 0 16 16">
+                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z">
+                </path>
+            </symbol>
+            <symbol id="circle-half" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
+            </symbol>
+            <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+                <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z">
+                </path>
+                <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z">
+                </path>
+            </symbol>
+            <symbol id="sun-fill" viewBox="0 0 16 16">
+                <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z">
+                </path>
+            </symbol>
+        </svg>
+
+        <!-- Botón de volver arriba -->
+        <button type="button" class="btn btn-danger btn-floating btn-lg z-3" id="btn-back-to-top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+
+        <section class="mb-5">
+            <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" aria-label="Slide 1" aria-current="true" class="active" ></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="3000">
+                        <img src="assets/images/carousel/slide1.png" class="w-100 object-fit-cover height-fbo" alt="Cursos online de calidad">
+                        <div class="container">
+                            <div
+                                class="carousel-caption slide-bottom-fbo carousel-caption-fbo text-start text-fbo-red p-4 rounded-3 bg-white bg-opacity-75 w-50 ms-0">
+                                <h2>Aprende a tu ritmo</h2>
+                                <p class="lead text-fbo fw-bold mb-0">Explora cientos de cursos online diseñados por expertos.</p>
+                                <p class="lead text-fbo fw-bold mb-4">Aprende desde cualquier lugar y a cualquier hora.</p>
+                                <a class="btn btn-lg btn-outline-dark" href="/cursos">Ver cursos</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item" data-bs-interval="3000">
+                        <img src="assets/images/carousel/slide2.png" class="w-100 object-fit-cover height-fbo" alt="Profesores expertos">
+                        <div class="container d-flex justify-content-center">
+                            <div class="position-absolute slide-bottom-fbo carousel-caption-fbo text-center text-fbo-red p-4 rounded-3 bg-white bg-opacity-75 w-50">
+                                <h2>Conecta con expertos.</h2>
+                                <p class="lead text-fbo fw-bold mb-4">Accede a mentorías personalizadas, clases en vivo y foros interactivos con docentes calificados.</p>
+                                <a class="btn btn-lg btn-outline-dark" href="/contacto">Más información</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item" data-bs-interval="3000">
+                        <img src="assets/images/carousel/slide3.png" class="w-100 object-fit-cover height-fbo" alt="Certificación de cursos">
+                        <div class="container d-flex justify-content-end">
+                            <div class="position-absolute slide-bottom-fbo carousel-caption-fbo text-end text-fbo-red p-4 rounded-3 bg-white bg-opacity-75 w-50">
+                                <h2>Certifica tu aprendizaje.</h2>
+                                <p class="lead text-fbo fw-bold mb-4">Obtén certificados que avalan tus conocimientos y mejoran tu perfil profesional.</p>
+                                <a class="btn btn-lg btn-outline-dark" href="/precios">Comienza ahora</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="bg-fbo text-white py-5 w-100">
+            <div class="container text-center">
+                <h2 class="display-5 fw-bold mb-3">Nuestra Trayectoria</h2>
+                <p class="lead mb-5">Conoce los números que respaldan nuestra experiencia y compromiso con tu aprendizaje.</p>
+
+                <div class="row text-center">
+                    <div class="col-6 col-md-3 mb-4">
+                        <h3 class="display-6 fw-bold text-fbo-red">2018</h3>
+                        <p class="text-white">Nacimiento de la empresa</p>
+                    </div>
+                    <div class="col-6 col-md-3 mb-4">
+                        <h3 class="display-6 fw-bold text-fbo-red">+500</h3>
+                        <p class="text-white">Cursos disponibles</p>
+                    </div>
+                    <div class="col-6 col-md-3 mb-4">
+                        <h3 class="display-6 fw-bold text-fbo-red">+20,000</h3>
+                        <p class="text-white">Cursos comprados</p>
+                    </div>
+                    <div class="col-6 col-md-3 mb-4">
+                        <h3 class="display-6 fw-bold text-fbo-red">+15,000</h3>
+                        <p class="text-white">Clientes satisfechos</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container mt-5 mb-5">
+            <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+                <h1 class="display-4 fw-bolder">Planes de precios</h1>
+                <p class="fs-5 text-muted">Elige el plan que mejor se adapte a tus necesidades. Sin letras pequeñas, sin sorpresas.</p>
+            </div>
+
+            <!-- Resumen plan actual -->
+            <div id="resumenPlan" class="alert alert-info d-flex align-items-center justify-content-between">
+                <div>
+                    <i class="bi bi-patch-check-fill me-2"></i>
+                    <strong>Tu plan actual:</strong> <span id="resumenPlanNombre">—</span>
+                    <span class="ms-2 text-body-secondary">(<span id="resumenPlanPrecio">—</span> / mes)</span>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="toggleAnual" />
+                    <label class="form-check-label" for="toggleAnual">Facturación anual</label>
+                </div>
+            </div>
+
+            <!-- Cards de planes -->
+            <div class="row g-4">
+                <!-- Gratuito -->
+                <div class="col-md-6 col-xl-4">
+                    <div class="card shadow-sm border bg-body text-body h-100 plan-card" data-plan="gratis">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <h5 class="text-uppercase fw-bold mb-0">Gratis</h5>
+                                <span class="badge text-bg-secondary">Starter</span>
+                            </div>
+                            <div class="mb-3">
+                                <span class="display-5 fw-bold precio-num">0</span>
+                                <span class="text-body-secondary">/ mes</span>
+                            </div>
+                            <ul class="list-unstyled text-body">
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>1 usuario</li>
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>5GB de almacenamiento</li>
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>Proyectos públicos ilimitados</li>
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>Acceso a comunidad</li>
+                                <li class="mb-2 text-body-secondary"><i class="bi bi-x-lg me-2"></i>Proyectos privados</li>
+                                <li class="mb-2 text-body-secondary"><i class="bi bi-x-lg me-2"></i>Soporte dedicado</li>
+                            </ul>
+                            <div class="d-grid">
+                                <button class="btn btn-danger btn-elegir-plan" data-plan="gratis">Elegir plan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pro -->
+                <div class="col-md-6 col-xl-4">
+                    <div class="card shadow-sm border bg-body text-body h-100 plan-card" data-plan="pro">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <h5 class="text-uppercase fw-bold mb-0"><i class="bi bi-star-fill me-1 text-warning"></i>Pro</h5>
+                                <span class="badge text-bg-warning text-dark">Popular</span>
+                            </div>
+                            <div class="mb-3">
+                                <span class="display-5 fw-bold precio-num" data-precio-base="9">9</span>
+                                <span class="text-body-secondary">/ mes</span>
+                            </div>
+                            <ul class="list-unstyled text-body">
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>5 usuarios</li>
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>50GB de almacenamiento</li>
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>Proyectos públicos y privados ilimitados</li>
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>Acceso a la comunidad</li>
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>Reportes mensuales</li>
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>Prioridad en soporte</li>
+                            </ul>
+                            <div class="d-grid">
+                                <button class="btn btn-danger btn-elegir-plan" data-plan="pro">Elegir plan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enterprise -->
+                <div class="col-md-6 col-xl-4">
+                    <div class="card shadow-sm border bg-body text-body h-100 plan-card" data-plan="enterprise">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <h5 class="text-uppercase fw-bold mb-0">Enterprise</h5>
+                                <span class="badge text-bg-primary">Empresas</span>
+                            </div>
+                            <div class="mb-3">
+                                <span class="display-5 fw-bold precio-num" data-precio-base="49">49</span>
+                                <span class="text-body-secondary">/ mes</span>
+                            </div>
+                            <ul class="list-unstyled text-body">
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>Usuarios ilimitados</li>
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>Almacenamiento ilimitado</li>
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>Proyectos públicos y privados ilimitados</li>
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>Soporte 24/7 dedicado</li>
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>Dominio y SSO</li>
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>Integraciones avanzadas</li>
+                            </ul>
+                            <div class="d-grid">
+                                <button class="btn btn-danger btn-elegir-plan" data-plan="enterprise">Elegir plan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container mb-5">
+            <div class="row align-items-center">
+                <h2 class="display-4 text-center mb-4 mt-4">Comparativa de planes</h2>
+                <div class="col-md-6">
+                    <div class="table-responsive">
+                        <table class="table text-center table-striped">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th></th>
+                                    <th>Gratis</th>
+                                    <th>Pro</th>
+                                    <th>Enterprise</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-fbo">
+                                <tr>
+                                    <th scope="row" class="text-start">Proyectos públicos</th>
+                                    <td><i class="bi bi-check-lg text-fbo-red"></i></td>
+                                    <td><i class="bi bi-check-lg text-fbo-red"></i></td>
+                                    <td><i class="bi bi-check-lg text-fbo-red"></i></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-start">Proyectos privados</th>
+                                    <td></td>
+                                    <td><i class="bi bi-check-lg text-fbo-red"></i></td>
+                                    <td><i class="bi bi-check-lg text-fbo-red"></i></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-start">Permisos</th>
+                                    <td><i class="bi bi-check-lg text-fbo-red"></i></td>
+                                    <td><i class="bi bi-check-lg text-fbo-red"></i></td>
+                                    <td><i class="bi bi-check-lg text-fbo-red"></i></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-start">Compartir</th>
+                                    <td></td>
+                                    <td><i class="bi bi-check-lg text-fbo-red"></i></td>
+                                    <td><i class="bi bi-check-lg text-fbo-red"></i></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-start">Miembros ilimitados</th>
+                                    <td></td>
+                                    <td><i class="bi bi-check-lg text-fbo-red"></i></td>
+                                    <td><i class="bi bi-check-lg text-fbo-red"></i></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-start">Seguridad extra</th>
+                                    <td></td>
+                                    <td></td>
+                                    <td><i class="bi bi-check-lg text-fbo-red"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 border p-4 rounded">
+                    <h4 class="mb-3">¿No sabes qué plan elegir?</h4>
+                    <p class="text-muted">Te ayudamos a encontrar la mejor opción para ti o tu equipo. Disfruta de soporte personalizado, migración de datos gratuita y descuentos por volumen.</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Asistencia prioritaria</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Actualizaciones incluidas</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Flexibilidad de pago</li>
+                    </ul>
+                    <a href="/contacto" class="btn btn-outline-danger mt-3">Solicita asesoramiento</a>
+                </div>
+            </div>
+        </section>
+
+        <div id="cestaCanvas" class="offcanvas offcanvas-end" tabindex="-1">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">Cesta de la compra</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div id="contenidoCestaCanvas" class="offcanvas-body">
+                <!-- JavaScript para generar la cesta de la compra -->
+            </div>
+        </div>
+
+        <div id="alertInicioSesion" class="alert alert-success alert-dismissible fade show position-fixed top-0 end-0 m-3 mt-5 z-3" role="alert" style="display: none;">
+            <i class="bi bi-check-circle-fill me-2"></i>Se ha iniciado sesión correctamente
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <div id="alertBienvenidoDeVuelta" class="alert alert-success alert-dismissible fade show position-fixed top-0 end-0 m-3 mt-5 z-3" role="alert" style="display: none;">
+            <i class="bi bi-check-circle-fill me-2"></i>Bienvenido de vuelta <span id="nombreUsuario"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </main>
+
+    <footer class="bg-fbo text-light pt-5 border-top">
+        <div class="container">
+            <div class="row gy-5">
+                <div class="col-lg-4 col-md-6 text-center text-md-start">
+                    <a href="/"
+                        class="d-inline-flex align-items-center mb-3 text-light text-decoration-none fs-4 fw-bold">
+                        <img src="assets/images/logo.png" alt="Logo de Foobar" width="40" height="40" class="d-inline-block align-text-top me-2">Foobar
+                    </a>
+                    <div class="mt-3">
+                        <p class="mb-2">Tel: +34 640 33 68 59</p>
+                        <p>Email: fernandobecerraortiz@suarezdefigueroa.es</p>
+                    </div>
+
+                    <div class="d-flex gap-3 mt-4 justify-content-center justify-content-md-start">
+                        <a class="btn btn-outline-light rounded-circle text-light fs-5 social-btn"><i class="bi bi-twitter-x"></i></a>
+                        <a class="btn btn-outline-light rounded-circle text-light fs-5 social-btn"><i class="bi bi-facebook"></i></a>
+                        <a class="btn btn-outline-light rounded-circle text-light fs-5 social-btn"><i class="bi bi-instagram"></i></a>
+                        <a class="btn btn-outline-light rounded-circle text-light fs-5 social-btn"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 text-center text-md-start">
+                    <h5 class="fw-semibold">Enlaces</h5>
+                    <ul class="nav flex-column pt-2">
+                        <li class="nav-item mb-2"><a href="/" class="text-reset text-decoration-none">Inicio</a></li>
+                        <li class="nav-item mb-2"><a href="/cursos" class="text-reset text-decoration-none">Cursos</a></li>
+                        <li class="nav-item mb-2"><a href="/precios" class="text-reset text-decoration-none">Precios</a></li>
+                        <li class="nav-item mb-2"><a href="/contacto" class="text-reset text-decoration-none">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6 text-center text-md-start">
+                    <h5 class="fw-semibold ">Legal</h5>
+                    <ul class="nav flex-column pt-2">
+                        <li class="nav-item mb-2"><a href="" class="text-reset text-decoration-none">Accesibilidad</a></li>
+                        <li class="nav-item mb-2"><a href="" class="text-reset text-decoration-none">Cookies</a></li>
+                        <li class="nav-item mb-2"><a href="" class="text-reset text-decoration-none">Privacidad</a></li>
+                        <li class="nav-item mb-2"><a href="" class="text-reset text-decoration-none">Términos</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-top pt-4 mt-4 pb-3 text-center small">© 2025 Foobar. Todos los derechos reservados.</div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>
