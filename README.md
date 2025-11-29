@@ -1,4 +1,4 @@
-# Proyecto Final – Foobar  
+# Proyecto Final – Foobar  <img src="docs/logo.png" alt="Logo Foobar" width="80px">
 
 ## Plataforma Web de Cursos Online
 
@@ -10,10 +10,9 @@ Ciclo Formativo Desarrollo de Aplicaciones Web
 Curso 2025  
 ```
 
-<div align="center">
-  <img src="docs/logo.png" alt="Logo Foobar" width="100px">
-  <img src="docs/iessuarezdefigueroa.png" alt="Logo del IES Suarez de Figueroa" width="340px">
-</div>
+<p align="center">
+  <img src="docs/iessuarezdefigueroa.png" alt="Logo del IES Suarez de Figueroa">
+</p>
 
 ---
 
