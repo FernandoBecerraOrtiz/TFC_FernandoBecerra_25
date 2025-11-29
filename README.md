@@ -1,13 +1,18 @@
 # Proyecto Final – Foobar  
+
 ## Plataforma Web de Cursos Online
 
-**Autor:** Fernando Becerra Ortiz  
-**Centro:** I.E.S. Suárez de Figueroa  
-**Tutor:** José Antonio Rodríguez Argueta  
-**Ciclo Formativo:** Desarrollo de Aplicaciones Web  
-**Curso:** 2025  
+```
+Autor: Fernando Becerra Ortiz  
+Centro I.E.S. Suárez de Figueroa  
+Tutor José Antonio Rodríguez Argueta  
+Ciclo Formativo Desarrollo de Aplicaciones Web  
+Curso 2025  
+```
 
-![Logo IES Suarez de Figueroa](docs/iessuarezdefigueroa.png)
+<p align="center">
+  <img src="docs/iessuarezdefigueroa.png" alt="Logo del IES Suarez de Figueroa">
+</p>
 
 ---
 
@@ -35,7 +40,7 @@
 
 **Foobar** es una plataforma web de cursos online desarrollada como Proyecto Final del CFGS en Desarrollo de Aplicaciones Web.
 
-Permite:
+Éstas son algunas de las funcionalidades que dispone:
 
 - Explorar cursos por categorías  
 - Filtrar cursos dinámicamente  
@@ -59,11 +64,13 @@ Permite:
 # 2. Objetivos del proyecto
 
 ## 2.1 Objetivo general  
-Desarrollar una plataforma web funcional que permita gestionar cursos online diferenciando roles y proporcionando un entorno dinámico e intuitivo.
+
+- Desarrollar una plataforma web funcional que permita gestionar cursos online diferenciando roles y proporcionando un entorno dinámico e intuitivo.
 
 ## 2.2 Objetivos específicos
 
-### Funcionales
+> ### Funcionales
+
 - Sistema de registro e inicio de sesión  
 - Gestión de usuarios por rol: alumno, profesor, administrador  
 - Listado y filtrado dinámico de cursos  
@@ -75,7 +82,8 @@ Desarrollar una plataforma web funcional que permita gestionar cursos online dif
   - Lecciones  
   - Categorías  
 
-### Técnicos
+> ### Técnicos
+
 - Diseño responsive completo  
 - Código JavaScript modular  
 - PHP con consultas preparadas  
@@ -88,21 +96,26 @@ Desarrollar una plataforma web funcional que permita gestionar cursos online dif
 
 # 3. Marco teórico
 
-### HTML5 y CSS3  
-Base de la estructura y el estilo.
+> ### HTML5 y CSS3  
 
-### Bootstrap 5  
-Se emplea para lograr una interfaz moderna, consistente y responsive.  
-Componentes usados: Grid, Offcanvas, Cards, Navbars, Modales.
+- Base de la estructura y estilos generales o muy específicos.
 
-### JavaScript + jQuery  
-Manejo de AJAX, manipulación del DOM, carga dinámica de contenido y adaptación de la web sin recargar páginas.
+> ### Bootstrap 5  
 
-### PHP 8  
-Gestiona sesiones, acceso a base de datos, CRUD completos, validaciones y generación de certificados.
+- Se emplea para lograr una interfaz moderna, consistente y responsive.  
+- Componentes usados: Grid, Offcanvas, Cards y Modales entre otros.
 
-### MySQL 8  
-Base de datos relacional normalizada con claves foráneas y relaciones entre usuarios, cursos, categorías y progreso.
+> ### JavaScript + jQuery  
+
+- Manejo de AJAX, manipulación del DOM, carga dinámica de contenido y adaptación de la web sin recargar páginas.
+
+> ### PHP 8  
+
+- Gestiona sesiones, acceso a base de datos, CRUD completos, validaciones y generación de certificados.
+
+> ### MySQL 8  
+
+- Base de datos relacional normalizada con claves foráneas y relaciones entre usuarios, cursos, lecciones, categorías y progreso.
 
 ---
 
@@ -110,38 +123,45 @@ Base de datos relacional normalizada con claves foráneas y relaciones entre usu
 
 ## 4.1 Análisis inicial
 
-Se identificaron tres tipos de usuario:
+- Se identificaron tres tipos de usuario:
 
-### Alumno
-- Compra cursos  
-- Visualiza lecciones  
-- Descarga certificados  
-- Gestiona su perfil  
+> ### Alumno
 
-### Profesor
-- Gestiona cursos propios  
-- Sube lecciones  
-- Visualiza inscritos  
-- Da de baja alumnos  
+   - Compra cursos  
+   - Visualiza lecciones  
+   - Descarga certificados  
+   - Gestiona su perfil  
 
-### Administrador
-- Control total del sistema  
-- CRUD sobre usuarios, cursos, categorías y lecciones  
-- Gestión de roles  
+> ### Profesor
+
+   - Gestiona cursos propios  
+   - Sube lecciones  
+   - Visualiza inscritos y su progreso en los cursos 
+   - Da de baja alumnos  
+
+> ### Administrador
+
+   - Control total del sistema  
+   - CRUD sobre usuarios, cursos, categorías y lecciones  
+   - Gestión de roles  
 
 ---
 
 ## 4.2 Diseño
 
+- El diseño se subdivide en 3 apartados, estructura interna de archivos, aspecto standard de escritorio del sítio web y responsividad (capacidad para visualizar correctamente el sítio en móviles, tablets y televisores)
+
 ### 4.2.1 Estructura de páginas
 
-#### Páginas públicas
-- `index.html`  
-- `cursos.html`  
-- `precios.html`  
-- `contacto.html`  
+> #### Páginas públicas
+
+- `index.html`: Introducción del sitio web, presentación de los profesores y opiniones de los mismos acerca del sitio
+- `cursos.html`: Listado de todos los cursos filtrable por categoria de los mismos así como opiniones de clientes. El usuario promedio se inscribirá a los cursos desde esta página
+- `precios.html`: Información detallada de los servicios ofrecidos así como información adicional
+- `contacto.html`: Dudas frecuentes, información de contacto con la empresa y formulario para hablar con administradores/gestores del sitio web
 
 #### Área privada – `perfil.html`
+
 Secciones cargadas por AJAX:
 - Panel  
 - Mis cursos  
@@ -151,16 +171,17 @@ Secciones cargadas por AJAX:
 - Ajustes  
 
 ### 4.2.2 Diseño responsive
+
 Problemas solucionados:
 - Sidebar móvil sin respuesta  
-- Offcanvas en administrador  
 - Footer no fijo  
-- Render incorrecto de `#adminContent`  
+- Render incorrecto de los contenidos que debe tratar el administrador a diferencia del profesor 
 - Botones compatibles con pantallas pequeñas  
 
 ### 4.2.3 Identidad visual
-- Colores neutros  
-- Componentes limpios  
+
+- Colores de marca identificables con armonía de color 
+- Componentes limpios, responsive, concisos y faciles de leer
 - Uso de Bootstrap Icons  
 
 ---
@@ -168,19 +189,23 @@ Problemas solucionados:
 ## 4.3 Implementación
 
 ### 4.3.1 Frontend – JavaScript
-#### `script.js`
+
+> #### `script.js`
+
 - Render de cursos  
 - Filtro por categorías  
 - Carrito dinámico  
 
-#### `perfil.js`
+> #### `perfil.js`
+
 - Operaciones del usuario  
 - Progreso y certificados  
 - Lecciones  
 - Ajustes del perfil  
 - Correcciones de eventos  
 
-#### `administrador.js`
+> #### `administrador.js`
+
 Incluye:
 - CRUD de usuarios  
 - CRUD de cursos  
@@ -191,9 +216,8 @@ Incluye:
 - Cargar Offcanvas dinámico  
 - Caches locales  
 
----
-
 ### 4.3.2 Backend – PHP
+
 Más de **30 archivos PHP**, encargados de:
 
 - Login / Registro  
@@ -208,23 +232,28 @@ Más de **30 archivos PHP**, encargados de:
 
 Todos devuelven **JSON estructurado** para AJAX.
 
----
-
 ### 4.3.3 Librerías PHP utilizadas
 
-[![Logo FPDF](docs/fpdf.gif)](https://github.com/Setasign/FPDF)
+<p align="center">
+  <a href="https://www.fpdf.org/" target="_blank"> 
+      <img src="docs/fpdf.gif" alt="Logo FPDF">
+  </a>
+</p>
 
 **Generación de certificados en tiempo real para acreditar que el usuario ha completado un curso**
 
-[![Logo PHPMailer](docs/phpmailer.png)](https://github.com/PHPMailer/PHPMailer)
+<p align="center">
+   <a href="https://github.com/PHPMailer/PHPMailer" target="_blank">
+      <img src="docs/phpmailer.png" alt="Logo PHPMailer">
+   </a>
+</p>
 
 **Envío de correos electrónicos al email del administrador**   
 
----
 
 ### 4.3.4 Base de datos – MySQL
 
-Tablas principales:
+Las tablas que componen la base de datos son:
 
 - `usuarios`  
 - `cursos`  
@@ -233,11 +262,9 @@ Tablas principales:
 - `lecciones`  
 - `progreso`  
 - `inscripciones`  
-- `certificados`  
-- `auditoria`  
 
 Validaciones:
-- Emails válidos  
+- Emails válidos 
 - Roles correctos  
 - Contraseñas seguras  
 - Inscripción única por curso  
@@ -246,28 +273,35 @@ Validaciones:
 
 ## 4.4 Problemas detectados y soluciones
 
-### Frontend
-- Sidebar móvil -> reorganización de eventos  
-- `adminContent` no cargaba -> IDs incorrectos  
-- Filtro por categorías -> eventos delegados  
-- Edición de cursos -> reconstrucción del modal  
+> ### Frontend
 
-### Backend
-- Contraseñas en texto plano -> `password_hash`  
-- Fallos de método -> control con `$_SERVER['REQUEST_METHOD']`  
-- Respuestas inconsistentes -> JSON unificado  
+- Sidebar móvil -> Reorganizar cuando se ejecutan determinadas funciones y que funciones se llaman entre ellas
+- Los botones no hacian nada -> Aliases de php incorrectos provocaba que no se asignasen los IDs y al recibir el dato por ajax, estaba vacio
+- Edición de cursos -> Reconstrucción del modal completamente y comprobar a base de prueba y error que todos los campos se rellenan con los valores de la base de datos 
+- Eliminado de elementos -> Que se actualice la lista de elementos a tiempo real cuando se elimina uno de ellos
 
-### Base de datos
+> ### Backend
+
+- Contraseñas en texto plano -> Uso de las funciones php `password_hash`, `password_get_info`, `password_verify` y `hash_equals` para crear y tratar las contraseñas encriptadas en CRUD
+- Fallos de método al que se accede la información (acceder directamente a la página de perfil sin haberse logueado) -> Control con `$_SERVER['REQUEST_METHOD']` en las funciones en las que se realizan operaciones CRUD  
+- Respuestas inconsistentes -> Mandar los resultados mediantes JSONs codificados correctamente esperando a ser tratados en los success de los bloques de código AJAX  
+
+> ### Base de datos
+
 - IDs inconsistentes  
 - Progreso incorrecto  
-- Lecciones sin numerar -> numeración automática  
+- Lecciones sin numerar
+- Asignar correctamente las lecciones a los cursos
+- Orden de las lecciones dentro de los cursos
+- Almacenar el progreso de los alumnos
 
 ---
 
 # 5. Conclusiones
 
-### Logros
-- Plataforma funcional  
+> ### Logros
+
+- Desarrollo de una plataforma funcional  
 - Interfaz moderna y responsive  
 - Roles correctamente implementados  
 - CRUD completos  
@@ -275,23 +309,26 @@ Validaciones:
 - Temas claro/oscuro  
 - Sistema de correo funcional  
 
-### Dificultades superadas
+> ### Dificultades superadas
+
 - Render dinámico complejo  
 - Depuración de AJAX  
 - Integración PHP + jQuery  
 - Refactorización completa del panel admin  
 
-### Futuras mejoras
+> ### Futuras mejoras
+
 - Pagos online reales  
 - Chat interno alumno con profesor  
-- Mejoras SEO  
-- Integración con APIs externas  
+- Mejoras SEO y de accesibilidad
+- Permitir a los profesores adjuntar materiales
+- Integración con APIs externas para el alojamiento de videos en portales como Daylimotion o Vimeo 
 
 ---
 
 # 6. Bibliografía
 
-- Bootstrap 5  
+- Bootstrap 5 Docs
 - PHP Manual  
 - MySQL 8 Reference  
 - PHPMailer Docs  
@@ -304,25 +341,28 @@ Validaciones:
 
 # 7. Anexo I – Manual de usuario
 
-- ![Descargar](docs/ManualDeUsuario)
+> ### <a href="docs/Manual de usuario Foobar.pdf" target="_blank">Descargar</a>
 
 ---
 
 # 8. Anexo II – Manual de instalación
 
-- ![Descargar](docs/ManualDeInstalacion)
+> ### <a href="docs/Manual de instalación Foobar.pdf" target="_blank">Descargar</a>
 
 ---
 
 # 9. Otros anexos
 
-## Diagrama de casos de uso
-![Casos de uso](docs/Diagrama%20de%20Casos%20de%20Uso.png)
+> ## Diagrama de casos de uso
 
-## Diagrama Entidad–Relación
-![Diagrama ER](docs/Diagrama%20Entidad%20Relacion%20Foobar.png)
+![Diagrama de Casos de uso](docs/Diagrama%20de%20Casos%20de%20Uso.png)
 
-## Modelo relacional
+> ## Diagrama Entidad–Relación
+
+![Diagrama Entidad Relacion](docs/Diagrama%20Entidad%20Relacion%20Foobar.png)
+
+> ## Modelo relacional
+
 ![Modelo Relacional](docs/Modelo%20Relacional%20Foobar.png)
 
 ---
