@@ -10,9 +10,10 @@ Ciclo Formativo Desarrollo de Aplicaciones Web
 Curso 2025  
 ```
 
-<p align="center">
-  <img src="docs/iessuarezdefigueroa.png" alt="Logo del IES Suarez de Figueroa">
-</p>
+<div align="center">
+  <img src="docs/logo.png" alt="Logo Foobar" width="100">
+  <img src="docs/iessuarezdefigueroa.png" alt="Logo del IES Suarez de Figueroa" width="70%">
+</div>
 
 ---
 
