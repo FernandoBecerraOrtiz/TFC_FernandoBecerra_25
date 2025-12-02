@@ -4,10 +4,10 @@
 
 ```
 Autor: Fernando Becerra Ortiz  
-Centro I.E.S. Suárez de Figueroa  
-Tutor José Antonio Rodríguez Argueta  
-Ciclo Formativo Desarrollo de Aplicaciones Web  
-Curso 2025  
+Centro: I.E.S. Suárez de Figueroa  
+Tutor: José Antonio Rodríguez Argueta  
+Ciclo Formativo: Desarrollo de Aplicaciones Web  
+Curso: 2025  
 ```
 
 ---
@@ -238,6 +238,8 @@ Todos devuelven **JSON estructurado** para AJAX.
 
 **Generación de certificados en tiempo real para acreditar que el usuario ha completado un curso**
 
+> #### <a href="docs/fpdf186.zip" target="_blank">Descargar</a>
+
 <p align="center">
    <a href="https://github.com/PHPMailer/PHPMailer" target="_blank">
       <img src="docs/phpmailer.png" alt="Logo PHPMailer">
@@ -246,6 +248,7 @@ Todos devuelven **JSON estructurado** para AJAX.
 
 **Envío de correos electrónicos al email del administrador**   
 
+> #### <a href="docs/PHPMailer-master.zip" target="_blank">Descargar</a>
 
 ### 4.3.4 Base de datos – MySQL
 
