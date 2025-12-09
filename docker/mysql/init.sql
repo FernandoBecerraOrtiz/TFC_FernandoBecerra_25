@@ -179,7 +179,7 @@ INSERT INTO `lecciones` (`id`, `curso_id`, `titulo`, `contenido`, `video_url`, `
 (18, 4, 'Eventos en jQuery', 'Manejo de eventos con jQuery.', 'https://www.youtube.com/watch?v=MaEyWOI7Abs', 3),
 (19, 4, 'Manipulación del DOM', 'Añadir y eliminar elementos dinámicamente.', 'https://www.youtube.com/watch?v=Z0RcDRsPh1Q', 4),
 (20, 4, 'AJAX y jQuery', 'Hacer peticiones AJAX con jQuery.', 'https://www.youtube.com/watch?v=TvYxbPuIqWc', 5),
-(21, 5, 'Introducción a JavaScript', 'Aprende los fundamentos de JavaScript, variables, tipos de datos, y operaciones básicas.', 'https://www.youtube.com/watch?v=NRoET8-8cbw', 1),
+(21, 5, 'Introducción a JavaScript', 'Aprende los fundamentos de JavaScript, variables, tipos de datos, y operaciones básicas.', 'https://www.youtube.com/watch?v=ER9SspLe4Hg', 1),
 (22, 5, 'Funciones en JavaScript', 'Cómo crear y utilizar funciones en JavaScript.', 'https://www.youtube.com/watch?v=Q4p8vRQX8uY', 2),
 (23, 5, 'Objetos en JavaScript', 'Introducción a los objetos y cómo usarlos en JavaScript.', 'https://www.youtube.com/watch?v=Icev9Oxf0WA', 3),
 (24, 5, 'Eventos en JavaScript', 'Manejo de eventos como clics, cambios de formulario, y más.', 'https://www.youtube.com/watch?v=qpU3WIqRz9I', 4),
