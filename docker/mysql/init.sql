@@ -37,12 +37,12 @@ INSERT INTO usuarios (nombre, email, password, tipo, fecha_registro, foto_perfil
 ('Miriam González', 'miriamgonp@gmail.com', '$2y$10$eVsXWsuAzc5/SE4JxTn3buJJonhi.9869U6n1DcRM3Kp4X4KcQDY6', 'profesor', DATE_ADD('2024-01-01', INTERVAL RAND() * (DATEDIFF('2025-12-31', '2024-01-01')) DAY), 'assets/images/team/miriamgonp.webp', 'miriamgonp', 'miriamgonp', 'miriamgonp/', 'miriamgonp/', 'Fullstack & Inclusión', 'gratis'),
 ('Brais Moure', 'mouredev@gmail.com', '$2y$10$eVsXWsuAzc5/SE4JxTn3buJJonhi.9869U6n1DcRM3Kp4X4KcQDY6', 'profesor', DATE_ADD('2024-01-01', INTERVAL RAND() * (DATEDIFF('2025-12-31', '2024-01-01')) DAY), 'assets/images/team/mouredev.webp', 'mouredev', 'mouredev', 'mouredev/', 'braismoure/', 'Mobile & DevOps', 'gratis'),
 -- Alumnos
-('Fernando Becerra Ortiz', 'fernando@gmail.com', '$2y$10$eVsXWsuAzc5/SE4JxTn3buJJonhi.9869U6n1DcRM3Kp4X4KcQDY6', 'estudiante', DATE_ADD('2024-01-01', INTERVAL RAND() * (DATEDIFF('2025-12-31', '2024-01-01')) DAY), 'person.svg', NULL, NULL, NULL, NULL, NULL, 'gratis'),
-('Lucía Hernández', 'lucia.ai@gmail.com', '$2y$10$MWyOVKGx0lONtDgGlh0rQuLBo/oaQ3z/VJixvC2UVIXfXFsB4Wm.O', 'estudiante', DATE_ADD('2024-01-01', INTERVAL RAND() * 600 DAY), 'person.svg', NULL, NULL, NULL, NULL, NULL, 'gratis'),
-('Andrés Robles', 'andres.ui@gmail.com', '$2y$10$mQTBHo13m.oCzp9aI1xYu.BIWG7hmdyuFxn72f3chcECCobg5HLTi', 'estudiante', DATE_ADD('2024-01-01', INTERVAL RAND() * 600 DAY), 'person.svg', NULL, NULL, NULL, NULL, NULL, 'gratis'),
-('Rosa Martínez', 'rosaestudiante@gmail.com', '$2y$10$OPW.ck1.mRNXlmg.XaTv2eLAPQHiWZnjBZVMT1d0EjsV23JzKC1GS', 'estudiante', DATE_ADD('2024-01-01', INTERVAL RAND() * 600 DAY), 'person.svg', NULL, NULL, NULL, NULL, NULL, 'gratis'),
-('Javier Ríos', 'javierrios@gmail.com', '$2y$10$GRkKJRu2Ut1o9/FFJXKC4.DOmVHm72C5sGUqBZpsqYD5T3OmhGUCi', 'estudiante', DATE_ADD('2024-01-01', INTERVAL RAND() * 600 DAY), 'person.svg', NULL, NULL, NULL, NULL, NULL, 'gratis'),
-('Sofía Delgado', 'sofia.ai@gmail.com', '$2y$10$blrvsjapTPoB5u/rmTD8GOiCOQOfU4EJU5Ehne8iluuKAy.cgZ3iW', 'estudiante', DATE_ADD('2024-01-01', INTERVAL RAND() * 600 DAY), 'person.svg', NULL, NULL, NULL, NULL, NULL, 'gratis');
+('Fernando Becerra Ortiz', 'fernando@gmail.com', '$2y$10$eVsXWsuAzc5/SE4JxTn3buJJonhi.9869U6n1DcRM3Kp4X4KcQDY6', 'estudiante', DATE_ADD('2024-01-01', INTERVAL RAND() * (DATEDIFF('2025-12-31', '2024-01-01')) DAY), 'assets/images/person.svg', NULL, NULL, NULL, NULL, NULL, 'gratis'),
+('Lucía Hernández', 'lucia.ai@gmail.com', '$2y$10$MWyOVKGx0lONtDgGlh0rQuLBo/oaQ3z/VJixvC2UVIXfXFsB4Wm.O', 'estudiante', DATE_ADD('2024-01-01', INTERVAL RAND() * 600 DAY), 'assets/images/person.svg', NULL, NULL, NULL, NULL, NULL, 'gratis'),
+('Andrés Robles', 'andres.ui@gmail.com', '$2y$10$mQTBHo13m.oCzp9aI1xYu.BIWG7hmdyuFxn72f3chcECCobg5HLTi', 'estudiante', DATE_ADD('2024-01-01', INTERVAL RAND() * 600 DAY), 'assets/images/person.svg', NULL, NULL, NULL, NULL, NULL, 'gratis'),
+('Rosa Martínez', 'rosaestudiante@gmail.com', '$2y$10$OPW.ck1.mRNXlmg.XaTv2eLAPQHiWZnjBZVMT1d0EjsV23JzKC1GS', 'estudiante', DATE_ADD('2024-01-01', INTERVAL RAND() * 600 DAY), 'assets/images/person.svg', NULL, NULL, NULL, NULL, NULL, 'gratis'),
+('Javier Ríos', 'javierrios@gmail.com', '$2y$10$GRkKJRu2Ut1o9/FFJXKC4.DOmVHm72C5sGUqBZpsqYD5T3OmhGUCi', 'estudiante', DATE_ADD('2024-01-01', INTERVAL RAND() * 600 DAY), 'assets/images/person.svg', NULL, NULL, NULL, NULL, NULL, 'gratis'),
+('Sofía Delgado', 'sofia.ai@gmail.com', '$2y$10$blrvsjapTPoB5u/rmTD8GOiCOQOfU4EJU5Ehne8iluuKAy.cgZ3iW', 'estudiante', DATE_ADD('2024-01-01', INTERVAL RAND() * 600 DAY), 'assets/images/person.svg', NULL, NULL, NULL, NULL, NULL, 'gratis');
 -- 9 - 14
 
 -- Crear tabla de cursos
