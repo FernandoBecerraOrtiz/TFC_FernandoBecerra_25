@@ -85,7 +85,7 @@ function comprobarLoginLocalStorage() {
     $("#perfil").removeClass("d-none")
     $("#formularioLoginModal").modal && $("#formularioLoginModal").modal("hide")
 
-    $("#perfil").find("a").eq(0).html(`<img class="rounded-circle mx-2" src="assets/images/${user.foto_perfil}" alt="Imagen perfil" width="40" height="40">Hola, ${user.nombre}`)
+    $("#perfil").find("a").eq(0).html(`<img class="rounded-circle mx-2" src="${user.foto_perfil}" alt="Imagen perfil" width="40" height="40">Hola, ${user.nombre}`)
 
     $("#perfil").attr("data-id", user.ID)
     $("#nombreUsuario").html(user.nombre)
@@ -143,7 +143,7 @@ function initLogin() {
                     $("#formularioLoginModal").modal &&
                         $("#formularioLoginModal").modal("hide")
 
-                    $("#perfil").find("a").eq(0).html(`<img class="rounded-circle me-2" src="assets/images/${me.foto_perfil || "person.svg"}" alt="Imagen perfil" width="40" height="40">Hola, ${me.nombre}`)
+                    $("#perfil").find("a").eq(0).html(`<img class="rounded-circle me-2" src="${me.foto_perfil || "assets/images/person.svg"}" alt="Imagen perfil" width="40" height="40">Hola, ${me.nombre}`)
 
                     $("#alertInicioSesion").fadeIn().delay(3000).fadeOut()
                     localStorage.setItem("usuarioLoggeado", JSON.stringify(me))
